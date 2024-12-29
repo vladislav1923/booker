@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@repo/logger": "*",
+    "@repo/trpc": "*",
     "@trpc/server": "^10.45.2",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",

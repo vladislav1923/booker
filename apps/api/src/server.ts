@@ -2,7 +2,7 @@ import { json, urlencoded } from 'body-parser';
 import express, { type Express } from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
-import { trpcRouter } from './trpc';
+import { trpcRouter } from '@repo/trpc';
 import * as trpcExpress from '@trpc/server/adapters/express';
 
 export const createServer = (): Express => {
