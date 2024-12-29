@@ -1,5 +1,5 @@
 prepare:
 	docker network create app_network
 
-dev:
+start:
 	docker-compose up

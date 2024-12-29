@@ -30,6 +30,9 @@ module.exports = {
     ".*.js",
     "node_modules/",
   ],
+  rules: {
+    quotes: ["error", "single"],
+  },
   overrides: [
     { files: ["*.js?(x)", "*.ts?(x)"] },
     {

@@ -8,6 +8,9 @@ module.exports = {
     ecmaVersion: "latest",
     sourceType: "module",
   },
+  rules: {
+    quotes: ["error", "single"],
+  },
   overrides: [
     {
       files: ["**/__tests__/**/*"],
