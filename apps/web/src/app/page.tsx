@@ -2,6 +2,7 @@
 
 import { useEffect, useState, ChangeEvent, FormEvent } from 'react';
 import { Button } from '@repo/ui/button';
+import { trpc } from '../trpc';
 
 const API_HOST = process.env.NEXT_PUBLIC_API_HOST || 'http://localhost:3001';
 
@@ -9,6 +10,8 @@ export default function Web() {
   const [name, setName] = useState<string>('');
   const [response, setResponse] = useState<{ message: string } | null>(null);
   const [error, setError] = useState<string | undefined>();
+
+  const { data } = trpc.getMessage.useQuery({ name: '' });
 
   useEffect(() => {
     setResponse(null);
