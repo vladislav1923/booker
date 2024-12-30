@@ -11,7 +11,7 @@ export default function Web() {
   const [response, setResponse] = useState<{ message: string } | null>(null);
   const [error, setError] = useState<string | undefined>();
 
-  const { data } = trpc.getMessage.useQuery({ name: '' });
+  const getMessage = trpc.getMessage.useMutation();
 
   useEffect(() => {
     setResponse(null);
@@ -25,8 +25,8 @@ export default function Web() {
     e.preventDefault();
 
     try {
-      const result = await fetch(`${API_HOST}/message/${name}`);
-      const response = await result.json();
+      const response = await getMessage.mutateAsync({ name });
+
       setResponse(response);
     } catch (err) {
       console.error(err);

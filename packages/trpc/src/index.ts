@@ -1,14 +1,9 @@
-import {initTRPC} from '@trpc/server';
-import {z} from 'zod';
+import {trpc} from './instance';
+import {getMessageTrpcRoute} from './routes/getMessage';
 
-export const trpc = initTRPC.create();
 
 export const trpcRouter = trpc.router({
-    getMessage: trpc.procedure.input(z.object({
-        name: z.string(),
-    })).query(({input}) => ({
-        message: `hello ${input.name}`,
-    })),
+    getMessage: getMessageTrpcRoute,
 });
 
 export type TrpcRouter = typeof trpcRouter;
