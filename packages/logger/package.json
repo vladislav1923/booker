@@ -14,17 +14,15 @@
     "lint": "tsc --noEmit && eslint \"src/**/*.ts*\" --max-warnings 0",
     "test": "jest"
   },
-  "jest": {
-    "preset": "@repo/jest-presets/node"
-  },
   "devDependencies": {
     "@jest/globals": "^29.7.0",
     "@repo/eslint-config": "*",
-    "@repo/jest-presets": "*",
+    "@repo/jest-config": "*",
     "@repo/typescript-config": "*",
     "@types/node": "^20.11.24",
     "eslint": "^8.57.0",
     "jest": "^29.7.0",
+    "ts-node": "^10.9.2",
     "typescript": "5.5.4"
   }
 }

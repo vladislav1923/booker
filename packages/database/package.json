@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "@repo/eslint-config": "*",
-    "@repo/jest-presets": "*",
+    "@repo/jest-config": "*",
     "@repo/typescript-config": "*",
     "@types/node": "^20.11.24",
     "eslint": "^8.57.0",
