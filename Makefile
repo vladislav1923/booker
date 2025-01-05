@@ -1,3 +1,6 @@
+database:
+	docker-compose -f docker-compose.db.yml up
+
 prepare:
 	docker network create app_network
 
