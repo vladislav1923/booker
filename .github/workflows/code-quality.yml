@@ -20,6 +20,9 @@ jobs:
         with:
           node-version: '18.x'
           cache: 'npm'
-      - run: yarn install
-      - run: yarn lint
-      - run: yarn test
+      - name: Install Dependencies
+        run: npm install
+      - name: Run Linter
+        run: npm run lint
+      - name: Run Unit Tests
+        run: npm test
