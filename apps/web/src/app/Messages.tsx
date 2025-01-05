@@ -1,10 +1,10 @@
-import {trpcRouter} from '@repo/trpc';
+import { trpcRouter } from '@repo/trpc';
 
 const getMessages = async () => {
     const response = await trpcRouter.createCaller({}).getMessages();
 
     return response;
-}
+};
 
 export const Messages = async () => {
     const messages = await getMessages();

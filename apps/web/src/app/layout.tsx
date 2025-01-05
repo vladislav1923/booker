@@ -1,15 +1,15 @@
-import {TrpcProvider} from '../trpc';
+import { TrpcProvider } from '../trpc';
 
 export default function RootLayout({
-  children,
+    children,
 }: {
-  children: React.ReactNode;
+    children: React.ReactNode;
 }) {
-  return (
-    <html lang="en">
-      <body>
-        <TrpcProvider>{children}</TrpcProvider>
-      </body>
-    </html>
-  );
+    return (
+        <html lang="en">
+            <body>
+                <TrpcProvider>{children}</TrpcProvider>
+            </body>
+        </html>
+    );
 }

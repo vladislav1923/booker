@@ -1,5 +1,5 @@
-import {trpc} from '../instance';
-import {z} from 'zod';
+import { trpc } from '../instance';
+import { z } from 'zod';
 
 const schema = z.object({
     name: z.string(),
@@ -7,9 +7,8 @@ const schema = z.object({
 
 export const getMessageTrpcRoute = trpc.procedure
     .input(schema)
-    .mutation(({input}) => {
+    .mutation(({ input }) => {
         return {
             message: `Hello, ${input.name}!`,
         };
     });
-

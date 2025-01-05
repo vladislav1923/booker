@@ -12,28 +12,28 @@ export const Form = () => {
     const getMessage = trpc.getMessage.useMutation();
 
     useEffect(() => {
-      setResponse(null);
-      setError(undefined);
+        setResponse(null);
+        setError(undefined);
     }, [name]);
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) =>
-      setName(e.target.value);
+        setName(e.target.value);
 
     const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
+        e.preventDefault();
 
-      try {
-        const response = await getMessage.mutateAsync({ name });
+        try {
+            const response = await getMessage.mutateAsync({ name });
 
-        setResponse(response);
-      } catch (err) {
-        console.error(err);
-        setError('Unable to fetch response');
-      }
+            setResponse(response);
+        } catch (err) {
+            console.error(err);
+            setError('Unable to fetch response');
+        }
     };
 
     const onReset = () => {
-      setName('');
+        setName('');
     };
 
     return (
@@ -63,5 +63,5 @@ export const Form = () => {
                 </div>
             )}
         </>
-    )
-}
+    );
+};
