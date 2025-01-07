@@ -11,8 +11,11 @@ const schema = z.object({
 });
 
 export const signUpTRPCRoute = trpc.procedure
+    .meta({ description: 'Create a new user' })
     .input(schema)
-    .mutation(async ({ input }) => {
+    .mutation(async ({ input, ctx }) => {
+        console.log('ctx', ctx);
+
         const newUser = await prisma.user.create({ ...input });
 
         return {

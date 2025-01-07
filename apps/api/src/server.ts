@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 import { trpcRouter } from '@repo/trpc';
 import * as trpcExpress from '@trpc/server/adapters/express';
+import { renderTrpcPanel } from 'trpc-panel';
 
 export const createServer = () => {
     const app = express();
@@ -18,7 +19,12 @@ export const createServer = () => {
         .use(
             '/trpc',
             trpcExpress.createExpressMiddleware({ router: trpcRouter })
-        );
+        )
+        .use('/panel', (_, res) => {
+            return res.send(
+                renderTrpcPanel(trpcRouter, { url: 'http://localhost:3001/trpc' })
+            );
+        });
 
     return app;
 };
