@@ -1,12 +1,12 @@
 'use client';
 
-import { TrpcRouter } from '@repo/trpc';
+import { TRPCRouter } from '@repo/trpc';
 import { createTRPCReact, type CreateTRPCReact } from '@trpc/react-query';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { httpBatchLink } from '@trpc/client';
 
-export const trpc: CreateTRPCReact<TrpcRouter, unknown, unknown> =
-    createTRPCReact<TrpcRouter>();
+export const trpc: CreateTRPCReact<TRPCRouter, unknown, unknown> =
+    createTRPCReact<TRPCRouter>();
 
 const queryClient = new QueryClient({
     defaultOptions: {

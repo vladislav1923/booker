@@ -4,9 +4,9 @@ import { getMessagesTrpcRoute } from './routes/getMessages';
 import routes from './routes';
 
 export const trpcRouter = trpc.router({
+    ...routes,
     getMessage: getMessageTrpcRoute,
     getMessages: getMessagesTrpcRoute,
-    ...routes
 });
 
 export type TRPCRouter = typeof trpcRouter;
