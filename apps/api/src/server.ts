@@ -22,7 +22,9 @@ export const createServer = () => {
         )
         .use('/panel', (_, res) => {
             return res.send(
-                renderTrpcPanel(trpcRouter, { url: 'http://localhost:3001/trpc' })
+                renderTrpcPanel(trpcRouter, {
+                    url: 'http://localhost:3001/trpc',
+                })
             );
         });
 

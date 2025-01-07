@@ -7,10 +7,10 @@ import { prisma } from '@repo/database';
 jest.mock('@repo/database', () => ({
     __esModule: true,
     prisma: mockDeep<PrismaClient>(),
-}))
+}));
 
 beforeEach(() => {
-    mockReset(prismaMock)
-})
+    mockReset(prismaMock);
+});
 
-export const prismaMock = prisma as unknown as DeepMockProxy<PrismaClient>
+export const prismaMock = prisma as unknown as DeepMockProxy<PrismaClient>;

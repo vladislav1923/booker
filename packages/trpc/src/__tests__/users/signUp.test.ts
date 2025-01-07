@@ -22,13 +22,15 @@ describe('@repo/trpc -> Users -> Sign Up', () => {
             created_at: new Date(),
             updated_at: new Date(),
         };
-        const expectedPrismaResponseClone: Partial<User> = cloneDeep(expectedPrismaResponse);
+        const expectedPrismaResponseClone: Partial<User> = cloneDeep(
+            expectedPrismaResponse
+        );
 
         delete expectedPrismaResponseClone.password_digest;
 
         const expectedResult = {
             user: expectedPrismaResponseClone,
-        }
+        };
 
         prismaMock.user.create.mockResolvedValue(expectedPrismaResponse);
 
@@ -58,7 +60,9 @@ describe('@repo/trpc -> Users -> Sign Up', () => {
 
         prismaMock.user.findUnique.mockResolvedValue(expectedPrismaResponse);
 
-        await expect(trpcRouter.createCaller({}).signUp(input)).rejects.toThrowError('User already exists');
+        await expect(
+            trpcRouter.createCaller({}).signUp(input)
+        ).rejects.toThrowError('User already exists');
     });
 
     it('should throw an error if password and confirm password do not match', async () => {
@@ -70,7 +74,9 @@ describe('@repo/trpc -> Users -> Sign Up', () => {
             confirm_password: '87654321',
         };
 
-        await expect(trpcRouter.createCaller({}).signUp(input)).rejects.toThrowError('Passwords do not match');
+        await expect(
+            trpcRouter.createCaller({}).signUp(input)
+        ).rejects.toThrowError('Passwords do not match');
     });
 
     it('should throw an error if input is not valid', async () => {
@@ -82,7 +88,9 @@ describe('@repo/trpc -> Users -> Sign Up', () => {
             confirm_password: '123',
         };
 
-        await expect(trpcRouter.createCaller({}).signUp(invalidFirstName)).rejects.toThrowError();
+        await expect(
+            trpcRouter.createCaller({}).signUp(invalidFirstName)
+        ).rejects.toThrowError();
 
         const invalidLastName = {
             first_name: 'James',
@@ -92,7 +100,9 @@ describe('@repo/trpc -> Users -> Sign Up', () => {
             confirm_password: '123',
         };
 
-        await expect(trpcRouter.createCaller({}).signUp(invalidLastName)).rejects.toThrowError();
+        await expect(
+            trpcRouter.createCaller({}).signUp(invalidLastName)
+        ).rejects.toThrowError();
 
         const invalidEmail = {
             first_name: 'James',
@@ -102,7 +112,9 @@ describe('@repo/trpc -> Users -> Sign Up', () => {
             confirm_password: '123',
         };
 
-        await expect(trpcRouter.createCaller({}).signUp(invalidEmail)).rejects.toThrowError();
+        await expect(
+            trpcRouter.createCaller({}).signUp(invalidEmail)
+        ).rejects.toThrowError();
 
         const invalidPassword = {
             first_name: 'James',
@@ -112,6 +124,8 @@ describe('@repo/trpc -> Users -> Sign Up', () => {
             confirm_password: '123',
         };
 
-        await expect(trpcRouter.createCaller({}).signUp(invalidPassword)).rejects.toThrowError();
+        await expect(
+            trpcRouter.createCaller({}).signUp(invalidPassword)
+        ).rejects.toThrowError();
     });
 });

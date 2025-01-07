@@ -18,7 +18,7 @@ export const signUpTRPCRoute = trpc.procedure
         const existingUser = await prisma.user.findUnique({
             where: {
                 email: input.email,
-            }
+            },
         });
 
         if (existingUser) {
@@ -37,7 +37,7 @@ export const signUpTRPCRoute = trpc.procedure
                 password_digest: generatePasswordDigest(input.password),
                 created_at: new Date(),
                 updated_at: new Date(),
-            }
+            },
         });
 
         delete newUser.password_digest;
