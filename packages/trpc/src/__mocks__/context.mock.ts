@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import { mockDeep, DeepMockProxy } from 'jest-mock-extended';
-import { Context } from '../../context';
-import { JWT_TOKEN, PASSWORD_DIGEST } from '../fixtures/users.fixture';
+import { Context } from '../context';
+import { JWT_TOKEN, PASSWORD_DIGEST } from '../__fixtures__/users.fixture';
 
 type CookieFunction = (
     name: string,

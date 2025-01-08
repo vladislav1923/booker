@@ -11,8 +11,7 @@
     "build": "tsc",
     "clean": "rm -rf dist",
     "dev": "tsc -w",
-    "lint": "tsc --noEmit && eslint \"src/**/*.ts*\" --max-warnings 0",
-    "test": "jest"
+    "lint": "tsc --noEmit && eslint \"src/**/*.ts*\" --max-warnings 0"
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",

@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from '@jest/globals';
-import { createMockContext, MockContext } from '../mocks/context.mock';
+import { createMockContext, MockContext } from '../../__mocks__/context.mock';
 import { Context } from '../../context';
 import { trpcRouter } from '../../index';
 import {
@@ -8,7 +8,7 @@ import {
     USER,
     USER_RESPONSE,
     WRONG_PASSWORD_DIGEST,
-} from '../fixtures/users.fixture';
+} from '../../__fixtures__/users.fixture';
 import { BadRequestError, Errors } from '../../errors';
 
 describe('@repo/trpc -> Users -> Login', () => {
