@@ -1,6 +1,5 @@
 import { trpc } from '../../instance';
 import { z } from 'zod';
-import { generatePasswordDigest } from '../../utils/secure';
 
 const schema = z.object({
     first_name: z.string().min(2).max(20),
@@ -33,7 +32,7 @@ export const signUpTRPCRoute = trpc.procedure
                 first_name: input.first_name,
                 last_name: input.last_name,
                 email: input.email,
-                password_digest: generatePasswordDigest(input.password),
+                password_digest: ctx.generatePasswordDigest(input.password),
                 created_at: new Date(),
                 updated_at: new Date(),
             },
