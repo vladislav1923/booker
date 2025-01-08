@@ -7,7 +7,11 @@ const schema = z.object({
     last_name: z.string().min(2).max(20).describe('Last name'),
     email: z.string().email().describe('Email'),
     password: z.string().min(6).max(20).describe('Password'),
-    confirm_password: z.string().min(6).max(20).describe('Password confirmation'),
+    confirm_password: z
+        .string()
+        .min(6)
+        .max(20)
+        .describe('Password confirmation'),
 });
 
 export const signUpTRPCRoute = trpc.procedure
@@ -21,7 +25,7 @@ export const signUpTRPCRoute = trpc.procedure
         });
 
         if (existingUser) {
-            throw new BadRequestError(Errors.UserAlreadyExists)
+            throw new BadRequestError(Errors.UserAlreadyExists);
         }
 
         if (input.password !== input.confirm_password) {

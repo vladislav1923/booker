@@ -1,12 +1,23 @@
 import { beforeEach, describe, expect, it } from '@jest/globals';
-import { cloneDeep, pick } from 'lodash';
 import { trpcRouter } from '../..';
-import { User } from '@prisma/client';
 import { createMockContext, MockContext } from '../mocks/context.mock';
 import { Context } from '../../context';
 import { BadRequestError, Errors } from '../../errors';
+import {
+    PASSWORD,
+    USER,
+    USER_RESPONSE,
+    WRONG_PASSWORD,
+} from '../fixtures/users.fixture';
 
 describe('@repo/trpc -> Users -> Sign Up', () => {
+    const INPUT = {
+        first_name: USER.first_name,
+        last_name: USER.last_name,
+        email: USER.email,
+        password: PASSWORD,
+        confirm_password: PASSWORD,
+    };
     let mockCtx: MockContext;
     let ctx: Context;
 
@@ -16,66 +27,22 @@ describe('@repo/trpc -> Users -> Sign Up', () => {
     });
 
     it('should create a new user', async () => {
-        const input = {
-            first_name: 'John',
-            last_name: 'Doe',
-            email: 'test@google.com',
-            password: '12345678',
-            confirm_password: '12345678',
-        };
-        const expectedPrismaResponse: User = {
-            id: '1',
-            first_name: 'John',
-            last_name: 'Doe',
-            email: 'test@google.com',
-            password_digest: 'egi8o-yrpnm-4y8n4-8y4n8-4y8n4',
-            created_at: new Date(),
-            updated_at: new Date(),
-        };
-        const expectedPrismaResponseClone: Partial<User> = pick(
-            cloneDeep(expectedPrismaResponse),
-            'id',
-            'first_name',
-            'last_name',
-            'email'
-        );
-
         const expectedResult = {
-            user: expectedPrismaResponseClone,
+            user: USER_RESPONSE,
         };
 
-        mockCtx.prisma.user.create.mockResolvedValue(expectedPrismaResponse);
+        mockCtx.prisma.user.create.mockResolvedValue(USER);
 
-        const result = await trpcRouter.createCaller(ctx).signUp(input);
+        const result = await trpcRouter.createCaller(ctx).signUp(INPUT);
 
         expect(result).toEqual(expectedResult);
     });
 
     it('should throw an error if user already exists', async () => {
-        const input = {
-            first_name: 'John',
-            last_name: 'Doe',
-            email: 'test@google.com',
-            password: '12345678',
-            confirm_password: '12345678',
-        };
-
-        const expectedPrismaResponse: User = {
-            id: '1',
-            first_name: 'John',
-            last_name: 'Doe',
-            email: 'test@google.com',
-            password_digest: 'egi8o-yrpnm-4y8n4-8y4n8-4y8n4',
-            created_at: new Date(),
-            updated_at: new Date(),
-        };
-
-        mockCtx.prisma.user.findUnique.mockResolvedValue(
-            expectedPrismaResponse
-        );
+        mockCtx.prisma.user.findUnique.mockResolvedValue(USER);
 
         try {
-            await trpcRouter.createCaller(ctx).signUp(input);
+            await trpcRouter.createCaller(ctx).signUp(INPUT);
             expect(true).toBeFalsy();
         } catch (error: any) {
             expect(error).toBeInstanceOf(BadRequestError);
@@ -84,16 +51,11 @@ describe('@repo/trpc -> Users -> Sign Up', () => {
     });
 
     it('should throw an error if password and confirm password do not match', async () => {
-        const input = {
-            first_name: 'John',
-            last_name: 'Doe',
-            email: 'test@google.com',
-            password: '12345678',
-            confirm_password: '87654321',
-        };
-
         try {
-           await trpcRouter.createCaller(ctx).signUp(input);
+            await trpcRouter.createCaller(ctx).signUp({
+                ...INPUT,
+                confirm_password: WRONG_PASSWORD,
+            });
             expect(true).toBeFalsy();
         } catch (error: any) {
             expect(error).toBeInstanceOf(BadRequestError);
@@ -102,52 +64,32 @@ describe('@repo/trpc -> Users -> Sign Up', () => {
     });
 
     it('should throw an error if input is not valid', async () => {
-        const invalidFirstName = {
-            first_name: 'J',
-            last_name: 'Dalen',
-            email: 'test@google.com',
-            password: '123',
-            confirm_password: '123',
-        };
-
         await expect(
-            trpcRouter.createCaller(ctx).signUp(invalidFirstName)
+            trpcRouter.createCaller(ctx).signUp({
+                ...INPUT,
+                first_name: 'J',
+            })
         ).rejects.toThrowError();
 
-        const invalidLastName = {
-            first_name: 'James',
-            last_name: 'D',
-            email: 'test@google.com',
-            password: '123',
-            confirm_password: '123',
-        };
-
         await expect(
-            trpcRouter.createCaller(ctx).signUp(invalidLastName)
+            trpcRouter.createCaller(ctx).signUp({
+                ...INPUT,
+                last_name: 'D',
+            })
         ).rejects.toThrowError();
 
-        const invalidEmail = {
-            first_name: 'James',
-            last_name: 'Dalen',
-            email: 'test@google',
-            password: '123',
-            confirm_password: '123',
-        };
-
         await expect(
-            trpcRouter.createCaller(ctx).signUp(invalidEmail)
+            trpcRouter.createCaller(ctx).signUp({
+                ...INPUT,
+                email: 'test@google',
+            })
         ).rejects.toThrowError();
 
-        const invalidPassword = {
-            first_name: 'James',
-            last_name: 'Dalen',
-            email: 'test@google',
-            password: '1',
-            confirm_password: '123',
-        };
-
         await expect(
-            trpcRouter.createCaller(ctx).signUp(invalidPassword)
+            trpcRouter.createCaller(ctx).signUp({
+                ...INPUT,
+                password: '123',
+            })
         ).rejects.toThrowError();
     });
 });

@@ -31,7 +31,9 @@ export const loginTRPCRoute = trpc.procedure
 
         const token = ctx.signJWT(user.id);
 
-        ctx.res.cookie('token', token, { expires: new Date(Date.now() + EXPIRES_IN) });
+        ctx.res.cookie('token', token, {
+            expires: new Date(Date.now() + EXPIRES_IN),
+        });
 
         return {
             user: {
