@@ -3,8 +3,8 @@ import { prisma } from '@repo/database';
 import { log } from '@repo/logger';
 
 export const createContext = ({
-  req,
-  res,
+    req,
+    res,
 }: trpcExpress.CreateExpressContextOptions) => {
     return {
         prisma,

@@ -3,16 +3,16 @@ import { cloneDeep, pick } from 'lodash';
 import { trpcRouter } from '../..';
 import { User } from '@prisma/client';
 import { MockContext, createMockContext } from '../mocks/context.mock';
-import { Context} from '../../context';
+import { Context } from '../../context';
 
 describe('@repo/trpc -> Users -> Sign Up', () => {
-    let mockCtx: MockContext
-    let ctx: Context
+    let mockCtx: MockContext;
+    let ctx: Context;
 
     beforeEach(() => {
-        mockCtx = createMockContext()
-        ctx = mockCtx as unknown as Context
-    })
+        mockCtx = createMockContext();
+        ctx = mockCtx as unknown as Context;
+    });
 
     it('should create a new user', async () => {
         const input = {
@@ -31,9 +31,13 @@ describe('@repo/trpc -> Users -> Sign Up', () => {
             created_at: new Date(),
             updated_at: new Date(),
         };
-        const expectedPrismaResponseClone: Partial<User> = pick(cloneDeep(
-            expectedPrismaResponse
-        ), 'id', 'first_name', 'last_name', 'email');
+        const expectedPrismaResponseClone: Partial<User> = pick(
+            cloneDeep(expectedPrismaResponse),
+            'id',
+            'first_name',
+            'last_name',
+            'email'
+        );
 
         const expectedResult = {
             user: expectedPrismaResponseClone,
@@ -65,7 +69,9 @@ describe('@repo/trpc -> Users -> Sign Up', () => {
             updated_at: new Date(),
         };
 
-        mockCtx.prisma.user.findUnique.mockResolvedValue(expectedPrismaResponse);
+        mockCtx.prisma.user.findUnique.mockResolvedValue(
+            expectedPrismaResponse
+        );
 
         await expect(
             trpcRouter.createCaller(ctx).signUp(input)

@@ -19,7 +19,10 @@ export const createServer = () => {
         })
         .use(
             '/trpc',
-            trpcExpress.createExpressMiddleware({ router: trpcRouter, createContext })
+            trpcExpress.createExpressMiddleware({
+                router: trpcRouter,
+                createContext,
+            })
         )
         .use('/panel', (_, res) => {
             return res.send(
