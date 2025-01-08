@@ -1,7 +1,9 @@
 import { PrismaClient, User } from '@prisma/client';
 
 export type Context = {
-    res: any;
+    res: {
+        cookie: (name: string, value: string, options: { expires: Date }) => void;
+    };
     req: any;
     prisma: PrismaClient;
     log: (log: string) => void;
