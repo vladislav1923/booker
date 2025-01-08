@@ -5,6 +5,7 @@ import cors from 'cors';
 import { trpcRouter } from '@repo/trpc';
 import * as trpcExpress from '@trpc/server/adapters/express';
 import { renderTrpcPanel } from 'trpc-panel';
+import { createContext } from './context';
 
 export const createServer = () => {
     const app = express();
@@ -18,7 +19,7 @@ export const createServer = () => {
         })
         .use(
             '/trpc',
-            trpcExpress.createExpressMiddleware({ router: trpcRouter })
+            trpcExpress.createExpressMiddleware({ router: trpcRouter, createContext })
         )
         .use('/panel', (_, res) => {
             return res.send(

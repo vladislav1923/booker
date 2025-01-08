@@ -1,10 +1,19 @@
-import { describe, expect, it } from '@jest/globals';
-import { cloneDeep } from 'lodash';
-import { prismaMock } from '../mocks/prisma.mock';
+import { describe, expect, it, beforeEach } from '@jest/globals';
+import { cloneDeep, pick } from 'lodash';
 import { trpcRouter } from '../..';
 import { User } from '@prisma/client';
+import { MockContext, createMockContext } from '../mocks/context.mock';
+import { Context} from '../../context';
 
 describe('@repo/trpc -> Users -> Sign Up', () => {
+    let mockCtx: MockContext
+    let ctx: Context
+
+    beforeEach(() => {
+        mockCtx = createMockContext()
+        ctx = mockCtx as unknown as Context
+    })
+
     it('should create a new user', async () => {
         const input = {
             first_name: 'John',
@@ -22,19 +31,17 @@ describe('@repo/trpc -> Users -> Sign Up', () => {
             created_at: new Date(),
             updated_at: new Date(),
         };
-        const expectedPrismaResponseClone: Partial<User> = cloneDeep(
+        const expectedPrismaResponseClone: Partial<User> = pick(cloneDeep(
             expectedPrismaResponse
-        );
-
-        delete expectedPrismaResponseClone.password_digest;
+        ), 'id', 'first_name', 'last_name', 'email');
 
         const expectedResult = {
             user: expectedPrismaResponseClone,
         };
 
-        prismaMock.user.create.mockResolvedValue(expectedPrismaResponse);
+        mockCtx.prisma.user.create.mockResolvedValue(expectedPrismaResponse);
 
-        const result = await trpcRouter.createCaller({}).signUp(input);
+        const result = await trpcRouter.createCaller(ctx).signUp(input);
 
         expect(result).toEqual(expectedResult);
     });
@@ -58,10 +65,10 @@ describe('@repo/trpc -> Users -> Sign Up', () => {
             updated_at: new Date(),
         };
 
-        prismaMock.user.findUnique.mockResolvedValue(expectedPrismaResponse);
+        mockCtx.prisma.user.findUnique.mockResolvedValue(expectedPrismaResponse);
 
         await expect(
-            trpcRouter.createCaller({}).signUp(input)
+            trpcRouter.createCaller(ctx).signUp(input)
         ).rejects.toThrowError('User already exists');
     });
 
@@ -75,7 +82,7 @@ describe('@repo/trpc -> Users -> Sign Up', () => {
         };
 
         await expect(
-            trpcRouter.createCaller({}).signUp(input)
+            trpcRouter.createCaller(ctx).signUp(input)
         ).rejects.toThrowError('Passwords do not match');
     });
 
@@ -89,7 +96,7 @@ describe('@repo/trpc -> Users -> Sign Up', () => {
         };
 
         await expect(
-            trpcRouter.createCaller({}).signUp(invalidFirstName)
+            trpcRouter.createCaller(ctx).signUp(invalidFirstName)
         ).rejects.toThrowError();
 
         const invalidLastName = {
@@ -101,7 +108,7 @@ describe('@repo/trpc -> Users -> Sign Up', () => {
         };
 
         await expect(
-            trpcRouter.createCaller({}).signUp(invalidLastName)
+            trpcRouter.createCaller(ctx).signUp(invalidLastName)
         ).rejects.toThrowError();
 
         const invalidEmail = {
@@ -113,7 +120,7 @@ describe('@repo/trpc -> Users -> Sign Up', () => {
         };
 
         await expect(
-            trpcRouter.createCaller({}).signUp(invalidEmail)
+            trpcRouter.createCaller(ctx).signUp(invalidEmail)
         ).rejects.toThrowError();
 
         const invalidPassword = {
@@ -125,7 +132,7 @@ describe('@repo/trpc -> Users -> Sign Up', () => {
         };
 
         await expect(
-            trpcRouter.createCaller({}).signUp(invalidPassword)
+            trpcRouter.createCaller(ctx).signUp(invalidPassword)
         ).rejects.toThrowError();
     });
 });

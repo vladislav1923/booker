@@ -1,4 +1,3 @@
-import { prisma } from '@repo/database';
 import { trpc } from '../../instance';
 import { z } from 'zod';
 import { generatePasswordDigest } from '../../utils/secure';
@@ -14,8 +13,8 @@ const schema = z.object({
 export const signUpTRPCRoute = trpc.procedure
     .meta({ description: 'Create a new user' })
     .input(schema)
-    .mutation(async ({ input }) => {
-        const existingUser = await prisma.user.findUnique({
+    .mutation(async ({ input, ctx }) => {
+        const existingUser = await ctx.prisma.user.findUnique({
             where: {
                 email: input.email,
             },
@@ -29,7 +28,7 @@ export const signUpTRPCRoute = trpc.procedure
             throw new Error('Passwords do not match');
         }
 
-        const newUser = await prisma.user.create({
+        const newUser = await ctx.prisma.user.create({
             data: {
                 first_name: input.first_name,
                 last_name: input.last_name,
@@ -40,9 +39,12 @@ export const signUpTRPCRoute = trpc.procedure
             },
         });
 
-        delete newUser.password_digest;
-
         return {
-            user: newUser,
+            user: {
+                id: newUser.id,
+                first_name: newUser.first_name,
+                last_name: newUser.last_name,
+                email: newUser.email,
+            },
         };
     });
