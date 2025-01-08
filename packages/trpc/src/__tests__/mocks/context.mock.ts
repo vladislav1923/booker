@@ -8,6 +8,8 @@ export type MockContext = Context & {
 
 export const createMockContext = (): MockContext => {
     return {
+        res: {},
+        req: {},
         prisma: mockDeep<PrismaClient>(),
         log: (log: string) => log,
         signJWT: (userId: string) => userId,

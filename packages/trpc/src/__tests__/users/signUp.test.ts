@@ -1,9 +1,10 @@
-import { describe, expect, it, beforeEach } from '@jest/globals';
+import { beforeEach, describe, expect, it } from '@jest/globals';
 import { cloneDeep, pick } from 'lodash';
 import { trpcRouter } from '../..';
 import { User } from '@prisma/client';
-import { MockContext, createMockContext } from '../mocks/context.mock';
+import { createMockContext, MockContext } from '../mocks/context.mock';
 import { Context } from '../../context';
+import { BadRequestError, Errors } from '../../errors';
 
 describe('@repo/trpc -> Users -> Sign Up', () => {
     let mockCtx: MockContext;
@@ -73,9 +74,13 @@ describe('@repo/trpc -> Users -> Sign Up', () => {
             expectedPrismaResponse
         );
 
-        await expect(
-            trpcRouter.createCaller(ctx).signUp(input)
-        ).rejects.toThrowError('User already exists');
+        try {
+            await trpcRouter.createCaller(ctx).signUp(input);
+            expect(true).toBeFalsy();
+        } catch (error: any) {
+            expect(error).toBeInstanceOf(BadRequestError);
+            expect(error.status).toBe(Errors.UserAlreadyExists);
+        }
     });
 
     it('should throw an error if password and confirm password do not match', async () => {
@@ -87,9 +92,13 @@ describe('@repo/trpc -> Users -> Sign Up', () => {
             confirm_password: '87654321',
         };
 
-        await expect(
-            trpcRouter.createCaller(ctx).signUp(input)
-        ).rejects.toThrowError('Passwords do not match');
+        try {
+           await trpcRouter.createCaller(ctx).signUp(input);
+            expect(true).toBeFalsy();
+        } catch (error: any) {
+            expect(error).toBeInstanceOf(BadRequestError);
+            expect(error.status).toBe(Errors.PasswordsDoNotMatch);
+        }
     });
 
     it('should throw an error if input is not valid', async () => {

@@ -1,12 +1,13 @@
 import { trpc } from '../../instance';
 import { z } from 'zod';
+import { BadRequestError, Errors } from '../../errors';
 
 const schema = z.object({
-    first_name: z.string().min(2).max(20),
-    last_name: z.string().min(2).max(20),
-    email: z.string().email(),
-    password: z.string().min(6).max(20),
-    confirm_password: z.string().min(6).max(20),
+    first_name: z.string().min(2).max(20).describe('First name'),
+    last_name: z.string().min(2).max(20).describe('Last name'),
+    email: z.string().email().describe('Email'),
+    password: z.string().min(6).max(20).describe('Password'),
+    confirm_password: z.string().min(6).max(20).describe('Password confirmation'),
 });
 
 export const signUpTRPCRoute = trpc.procedure
@@ -20,11 +21,11 @@ export const signUpTRPCRoute = trpc.procedure
         });
 
         if (existingUser) {
-            throw new Error('User already exists');
+            throw new BadRequestError(Errors.UserAlreadyExists)
         }
 
         if (input.password !== input.confirm_password) {
-            throw new Error('Passwords do not match');
+            throw new BadRequestError(Errors.PasswordsDoNotMatch);
         }
 
         const newUser = await ctx.prisma.user.create({
