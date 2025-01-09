@@ -1,4 +1,4 @@
-import { Passport} from 'passport';
+import { Passport } from 'passport';
 import { NextFunction, Request, Response } from 'express';
 import { Strategy as JWTStrategy } from 'passport-jwt';
 import { prisma } from '@repo/database';
@@ -41,4 +41,3 @@ export default (req: Request, res: Response, next: NextFunction) => {
 
     passport.authenticate('jwt', { session: false })(req, res, next);
 };
-

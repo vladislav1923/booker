@@ -1,7 +1,11 @@
 'use client';
 
 import { TRPCRouter } from '@repo/trpc';
-import { createTRPCProxyClient, createTRPCReact, type CreateTRPCReact } from '@trpc/react-query';
+import {
+    createTRPCProxyClient,
+    createTRPCReact,
+    type CreateTRPCReact,
+} from '@trpc/react-query';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { httpBatchLink } from '@trpc/client';
 

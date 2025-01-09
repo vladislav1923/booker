@@ -5,7 +5,7 @@ import { generatePasswordDigest, signJWT } from './utlis/authorization';
 
 type ExtendedRequest = trpcExpress.CreateExpressContextOptions['req'] & {
     user: User | undefined;
-}
+};
 
 export const createContext = ({
     req,
