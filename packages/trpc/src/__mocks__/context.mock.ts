@@ -9,10 +9,13 @@ type CookieFunction = (
     options: { expires: Date }
 ) => {};
 
+type ClearCookieFunction = (name: string) => {};
+
 export type MockContext = Context & {
     prisma: DeepMockProxy<PrismaClient>;
     res: DeepMockProxy<{
         cookie: DeepMockProxy<CookieFunction>;
+        clearCookie: DeepMockProxy<ClearCookieFunction>;
     }>;
 };
 
@@ -20,6 +23,7 @@ export const createMockContext = (): MockContext => {
     return {
         res: mockDeep<{
             cookie: CookieFunction;
+            clearCookie: ClearCookieFunction;
         }>(),
         req: {},
         prisma: mockDeep<PrismaClient>(),

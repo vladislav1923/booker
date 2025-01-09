@@ -1,9 +1,14 @@
-import { trpcRouter } from '@repo/trpc';
+// import { trpcProxyClient } from '../trpc';
 
 const getMessages = async () => {
-    const response = await trpcRouter.createCaller({}).getMessages();
+    // const response = await trpcProxyClient.getMessages.query();
+    //
+    // return response;
 
-    return response;
+    return [
+        { id: 1, text: 'Hello' },
+        { id: 2, text: 'World' },
+    ];
 };
 
 export const Messages = async () => {

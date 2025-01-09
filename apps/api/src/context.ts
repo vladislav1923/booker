@@ -1,12 +1,18 @@
+import { prisma, User } from '@repo/database';
 import * as trpcExpress from '@trpc/server/adapters/express';
-import { prisma } from '@repo/database';
 import { log } from '@repo/logger';
-import { generatePasswordDigest, signJWT } from '@repo/auth';
+import { generatePasswordDigest, signJWT } from './utlis/authorization';
+
+type ExtendedRequest = trpcExpress.CreateExpressContextOptions['req'] & {
+    user: User | undefined;
+}
 
 export const createContext = ({
     req,
     res,
 }: trpcExpress.CreateExpressContextOptions) => {
+    const user = (req as ExtendedRequest).user;
+
     return {
         req,
         res,
@@ -14,7 +20,9 @@ export const createContext = ({
         log,
         generatePasswordDigest,
         signJWT,
-        authorized: false,
-        user: null,
+        authorized: user !== undefined,
+        user: user ?? null,
     };
 };
+
+export type Context = ReturnType<typeof createContext>;

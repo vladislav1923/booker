@@ -7,6 +7,7 @@ export type Context = {
             value: string,
             options: { expires: Date }
         ) => void;
+        clearCookie: (name: string) => void;
     };
     req: any;
     prisma: PrismaClient;
