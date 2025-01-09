@@ -10,7 +10,7 @@ passport.use(
     new JWTStrategy(
         {
             jwtFromRequest: tokenExtractor,
-            secretOrKey: 'some_string_to_sign_the_token',
+            secretOrKey: process.env.SECRET_KEY as string,
         },
         async (payload: { userId: string }, done) => {
             try {

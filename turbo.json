@@ -23,6 +23,9 @@
     },
     "studio": {
       "cache": false
+    },
+    "generate": {
+      "cache": false
     }
   }
 }

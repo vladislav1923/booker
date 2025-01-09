@@ -7,7 +7,7 @@ const generatePasswordDigest = (password: string): string => {
 };
 
 const signJWT = (userId: string): string => {
-    return jwt.sign({ userId }, 'some_string_to_sign_the_token');
+    return jwt.sign({ userId }, process.env.SECRET_KEY as string);
 };
 
 const tokenExtractor = (req: Request) => {
