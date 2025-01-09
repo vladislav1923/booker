@@ -2,7 +2,7 @@
 
 import { TRPCRouter } from '@repo/trpc';
 import {
-    createTRPCProxyClient,
+    // createTRPCProxyClient,
     createTRPCReact,
     type CreateTRPCReact,
 } from '@trpc/react-query';

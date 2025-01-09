@@ -9,7 +9,7 @@ export type Context = {
         ) => void;
         clearCookie: (name: string) => void;
     };
-    req: any;
+    req: unknown;
     prisma: PrismaClient;
     log: (log: string) => void;
     authorized: boolean;

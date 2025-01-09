@@ -7,9 +7,9 @@ type CookieFunction = (
     name: string,
     value: string,
     options: { expires: Date }
-) => {};
+) => void;
 
-type ClearCookieFunction = (name: string) => {};
+type ClearCookieFunction = (name: string) => void;
 
 export type MockContext = Context & {
     prisma: DeepMockProxy<PrismaClient>;
@@ -28,8 +28,8 @@ export const createMockContext = (): MockContext => {
         req: {},
         prisma: mockDeep<PrismaClient>(),
         log: (log: string) => log,
-        signJWT: (userId: string) => JWT_TOKEN,
-        generatePasswordDigest: (password: string) => PASSWORD_DIGEST,
+        signJWT: () => JWT_TOKEN,
+        generatePasswordDigest: () => PASSWORD_DIGEST,
         user: null,
         authorized: false,
     };

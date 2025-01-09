@@ -2,15 +2,7 @@ import { prisma } from './client';
 
 import type { User } from '@prisma/client';
 
-const DEFAULT_USERS = [
-    {
-        id: '1',
-        first_name: 'Konstantin',
-        last_name: 'Voznesenskiy',
-        email: 'kon.voz@yandex.com',
-        password_digest: 'password',
-    },
-] as Array<Partial<User>>;
+const DEFAULT_USERS = [] as Array<User>;
 
 (async () => {
     try {

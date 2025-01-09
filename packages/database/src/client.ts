@@ -1,10 +1,13 @@
 import { PrismaClient } from '@prisma/client';
 
-// @ts-ignore
+declare global {
+    // eslint-disable-next-line no-var
+    var prisma: PrismaClient | undefined;
+}
+
 export const prisma = global.prisma || new PrismaClient();
 
 if (process.env.NODE_ENV !== 'production') {
-    // @ts-ignore
     global.prisma = prisma;
 }
 

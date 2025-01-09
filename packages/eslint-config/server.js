@@ -1,5 +1,10 @@
+const { resolve } = require("node:path");
+
+const project = resolve(process.cwd(), "tsconfig.json");
+
 module.exports = {
-  extends: ["eslint:recommended"],
+  extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+  plugins: ["@typescript-eslint"],
   env: {
     node: true,
     es6: true,
