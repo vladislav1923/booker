@@ -1,6 +1,6 @@
 import { prisma } from './client';
 
-import type { User, Language } from '@prisma/client';
+import type { User, Language, Status } from '@prisma/client';
 
 const DEFAULT_USERS = [
     {
@@ -67,6 +67,32 @@ const DEFAULT_LANGUAGES = [
         updatedAt: new Date(),
     },
 ] as Array<Language>;
+const DEFAULT_STATUSES = [
+    {
+        id: 'planned',
+        name: 'Planned',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+    },
+    {
+        id: 'in_progress',
+        name: 'In Progress',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+    },
+    {
+        id: 'on_hold',
+        name: 'On Hold',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+    },
+    {
+        id: 'completed',
+        name: 'Completed',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+    },
+] as Array<Status>;
 
 (async () => {
     try {
@@ -96,6 +122,21 @@ const DEFAULT_LANGUAGES = [
                     },
                     create: {
                         ...language,
+                    },
+                })
+            )
+        );
+        await Promise.all(
+            DEFAULT_STATUSES.map((status) =>
+                prisma.status.upsert({
+                    where: {
+                        id: status.id!,
+                    },
+                    update: {
+                        ...status,
+                    },
+                    create: {
+                        ...status,
                     },
                 })
             )

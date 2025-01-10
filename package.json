@@ -23,7 +23,9 @@
     "test": "turbo run test",
     "studio": "turbo run studio"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@prisma/client": "5.22.0"
+  },
   "devDependencies": {
     "prettier": "^3.2.5",
     "turbo": "^2.3.3"
