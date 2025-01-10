@@ -1,6 +1,6 @@
 import { prisma } from './client';
 
-import type { User, Language, Status } from '@prisma/client';
+import type { User, Language, Status, Author } from '@prisma/client';
 
 const DEFAULT_USERS = [
     {
@@ -93,6 +93,24 @@ const DEFAULT_STATUSES = [
         updatedAt: new Date(),
     },
 ] as Array<Status>;
+const DEFAULT_AUTHORS = [
+    {
+        id: 'bulgakov',
+        firstName: 'Михаил',
+        lastName: 'Булгаков',
+        userId: 'cm5qlh0f0000010wo5qmxafez',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+    },
+    {
+        id: 'vonnegut',
+        firstName: 'Kurt',
+        lastName: 'Vonnegut',
+        userId: 'cm5qlh0f0000010wo5qmxafez',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+    },
+] as Array<Author>;
 
 (async () => {
     try {
@@ -137,6 +155,21 @@ const DEFAULT_STATUSES = [
                     },
                     create: {
                         ...status,
+                    },
+                })
+            )
+        );
+        await Promise.all(
+            DEFAULT_AUTHORS.map((author) =>
+                prisma.author.upsert({
+                    where: {
+                        id: author.id!,
+                    },
+                    update: {
+                        ...author,
+                    },
+                    create: {
+                        ...author,
                     },
                 })
             )

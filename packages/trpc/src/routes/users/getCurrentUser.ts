@@ -1,5 +1,6 @@
 import { trpc } from '../../instance';
 import { Errors, ForbiddenError } from '../../errors';
+import { User } from '@prisma/client';
 
 export const getCurrentUserTRPCRoute = trpc.procedure
     .meta({ description: 'Returns the current authorized user' })
@@ -8,7 +9,7 @@ export const getCurrentUserTRPCRoute = trpc.procedure
             throw new ForbiddenError(Errors.NotAuthorized);
         }
 
-        const user = ctx.user;
+        const user: User = ctx.user;
 
         return {
             user: {
