@@ -1,6 +1,6 @@
 import { prisma } from './client';
 
-import type { User, Language, Status, Author } from '@prisma/client';
+import type { User, Language, Status, Author, Book } from '@prisma/client';
 
 const DEFAULT_USERS = [
     {
@@ -111,6 +111,32 @@ const DEFAULT_AUTHORS = [
         updatedAt: new Date(),
     },
 ] as Array<Author>;
+const DEFAULT_BOOKS = [
+    {
+        id: 'master_and_margarita',
+        title: 'Мастер и Маргарита',
+        description:
+            'Многослойный роман, в котором переплетаются несколько сюжетных линий, включая визит сатаны и его свиты в Москву 1930-х годов, трагическую историю любви Мастера и Маргариты, а также библейскую хронику событий, связанных с Понтием Пилатом. Роман исследует вопросы добра и зла, власти, человеческой свободы и духовного поиска, одновременно облекая эти темы в магический реализм и сатиру на советскую действительность. Через образы волшебства и мистики Булгаков задает вопросы о смысле жизни, справедливости и любви, предлагая читателю разгадывать многозначные символы и философские аллюзии.',
+        authorId: 'bulgakov',
+        languageId: 'ru',
+        statusId: 'completed',
+        userId: 'cm5qlh0f0000010wo5qmxafez',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+    },
+    {
+        id: 'slaughterhouse_five',
+        title: 'Slaughterhouse-Five, or, The Children\'s Crusade',
+        description:
+            'science fiction-infused anti-war novel that follows the life of Billy Pilgrim, an optometrist and soldier, who becomes "unstuck in time." Through a series of fragmented, non-linear events, Billy experiences moments from his life, including his time as a prisoner of war during the bombing of Dresden in World War II, his abduction by extraterrestrial Tralfamadorians, and his reflections on life, death, and fate. The novel explores the absurdity of war, the inevitability of death, and the idea of free will, using dark humor and a unique narrative structure to critique the horrors of violence and the human tendency to disassociate from the trauma it causes. Its famous refrain, "so it goes," reflects the novel\'s fatalistic view of life and death, highlighting the randomness and inevitability of suffering and loss.',
+        authorId: 'vonnegut',
+        languageId: 'en',
+        statusId: 'in_progress',
+        userId: 'cm5qlh0f0000010wo5qmxafez',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+    }
+] as Array<Book>;
 
 (async () => {
     try {
@@ -170,6 +196,21 @@ const DEFAULT_AUTHORS = [
                     },
                     create: {
                         ...author,
+                    },
+                })
+            )
+        );
+        await Promise.all(
+            DEFAULT_BOOKS.map((book) =>
+                prisma.book.upsert({
+                    where: {
+                        id: book.id!,
+                    },
+                    update: {
+                        ...book,
+                    },
+                    create: {
+                        ...book,
                     },
                 })
             )
