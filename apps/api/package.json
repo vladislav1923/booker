@@ -11,7 +11,7 @@
     "test": "jest --detectOpenHandles"
   },
   "dependencies": {
-    "@prisma/client": "^6.2.0",
+    "@prisma/client": "5.22.0",
     "@repo/database": "*",
     "@repo/logger": "*",
     "@repo/trpc": "*",

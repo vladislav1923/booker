@@ -17,3 +17,12 @@ model User {
   createdAt      DateTime @default(now()) @map("created_at")
   updatedAt      DateTime @default(now()) @updatedAt @map("updated_at")
 }
+
+model Language {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  primary   Boolean  @default(false)
+  emoji     String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+}
