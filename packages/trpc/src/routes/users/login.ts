@@ -25,7 +25,7 @@ export const loginTRPCRoute = trpc.procedure
 
         const passwordDigest = ctx.generatePasswordDigest(input.password);
 
-        if (passwordDigest !== user.password_digest) {
+        if (passwordDigest !== user.passwordDigest) {
             throw new BadRequestError(Errors.IncorrectEmailOrPassword);
         }
 
@@ -38,8 +38,8 @@ export const loginTRPCRoute = trpc.procedure
         return {
             user: {
                 id: user.id,
-                first_name: user.first_name,
-                last_name: user.last_name,
+                firstName: user.firstName,
+                lastName: user.lastName,
                 email: user.email,
             },
         };

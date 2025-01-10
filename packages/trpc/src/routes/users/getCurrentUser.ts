@@ -13,8 +13,8 @@ export const getCurrentUserTRPCRoute = trpc.procedure
         return {
             user: {
                 id: user.id,
-                first_name: user.first_name,
-                last_name: user.last_name,
+                firstName: user.firstName,
+                lastName: user.lastName,
                 email: user.email,
             },
         };

@@ -12,11 +12,11 @@ import {
 
 describe('@repo/trpc -> Users -> Sign Up', () => {
     const INPUT = {
-        first_name: USER.first_name,
-        last_name: USER.last_name,
+        firstName: USER.firstName,
+        lastName: USER.lastName,
         email: USER.email,
         password: PASSWORD,
-        confirm_password: PASSWORD,
+        confirmPassword: PASSWORD,
     };
     let mockCtx: MockContext;
     let ctx: Context;
@@ -54,7 +54,7 @@ describe('@repo/trpc -> Users -> Sign Up', () => {
         try {
             await trpcRouter.createCaller(ctx).signUp({
                 ...INPUT,
-                confirm_password: WRONG_PASSWORD,
+                confirmPassword: WRONG_PASSWORD,
             });
             expect(true).toBeFalsy();
         } catch (error: any) {
@@ -67,14 +67,14 @@ describe('@repo/trpc -> Users -> Sign Up', () => {
         await expect(
             trpcRouter.createCaller(ctx).signUp({
                 ...INPUT,
-                first_name: 'J',
+                firstName: 'J',
             })
         ).rejects.toThrowError();
 
         await expect(
             trpcRouter.createCaller(ctx).signUp({
                 ...INPUT,
-                last_name: 'D',
+                lastName: 'D',
             })
         ).rejects.toThrowError();
 

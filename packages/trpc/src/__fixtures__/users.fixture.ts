@@ -15,19 +15,19 @@ const WRONG_PASSWORD_DIGEST =
 
 const USER: User = {
     id: 'cm5me5qdw0000vld0ilpdh2uq',
-    first_name: 'John',
-    last_name: 'Doe',
+    firstName: 'John',
+    lastName: 'Doe',
     email: 'john.doe@gmail.com',
-    password_digest: PASSWORD_DIGEST,
-    created_at: new Date(),
-    updated_at: new Date(),
+    passwordDigest: PASSWORD_DIGEST,
+    createdAt: new Date(),
+    updatedAt: new Date(),
 };
 
 const USER_RESPONSE = pick(
     cloneDeep(USER),
     'id',
-    'first_name',
-    'last_name',
+    'firstName',
+    'lastName',
     'email'
 );
 

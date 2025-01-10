@@ -54,7 +54,7 @@ describe('@repo/trpc -> Users -> Login', () => {
     it('should throw an error if the password is incorrect', async () => {
         mockCtx.prisma.user.findUnique.mockResolvedValue({
             ...USER,
-            password_digest: WRONG_PASSWORD_DIGEST,
+            passwordDigest: WRONG_PASSWORD_DIGEST,
         });
 
         try {
