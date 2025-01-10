@@ -8,10 +8,11 @@ const DEFAULT_USERS = [
         firstName: 'Vladislav',
         lastName: 'Kozak',
         email: '1923@bk.ru',
-        passwordDigest: 'dd712114fb283417de4da3512e17486adbda004060d0d1646508c8a2740d29b4', // 123451
+        passwordDigest:
+            'dd712114fb283417de4da3512e17486adbda004060d0d1646508c8a2740d29b4', // 123451
         createdAt: new Date(),
         updatedAt: new Date(),
-    }
+    },
 ] as Array<User>;
 const DEFAULT_LANGUAGES = [
     {
