@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { trpc } from '../../instance';
-import { Errors, ForbiddenError, NotFoundError } from '../../errors';
+import { Errors, ForbiddenError } from '../../errors';
 
 const schema = z.object({
     userId: z.string(),
