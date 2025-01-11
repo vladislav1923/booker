@@ -1,5 +1,6 @@
-import { trpc } from '../instance';
 import { z } from 'zod';
+
+import { trpc } from '../instance';
 
 const schema = z.object({
     name: z.string(),

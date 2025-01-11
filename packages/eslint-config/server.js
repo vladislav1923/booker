@@ -4,7 +4,7 @@ const project = resolve(process.cwd(), "tsconfig.json");
 
 module.exports = {
   extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
-  plugins: ["@typescript-eslint"],
+  plugins: ["@typescript-eslint", "simple-import-sort"],
   env: {
     node: true,
     es6: true,
@@ -21,7 +21,9 @@ module.exports = {
     },
   },
   rules: {
-    quotes: ["error", "single"],
+    "quotes": ["error", "single"],
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error"
   },
   overrides: [
     {

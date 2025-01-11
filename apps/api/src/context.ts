@@ -1,6 +1,7 @@
 import { prisma, User } from '@repo/database';
-import * as trpcExpress from '@trpc/server/adapters/express';
 import { log } from '@repo/logger';
+import * as trpcExpress from '@trpc/server/adapters/express';
+
 import { generatePasswordDigest, signJWT } from './utlis/authorization';
 
 type ExtendedRequest = trpcExpress.CreateExpressContextOptions['req'] & {

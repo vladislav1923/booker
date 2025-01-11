@@ -1,5 +1,6 @@
+import { describe, expect, it } from '@jest/globals';
 import supertest from 'supertest';
-import { describe, it, expect } from '@jest/globals';
+
 import { createServer } from '../server';
 
 describe('server', () => {

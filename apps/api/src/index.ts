@@ -1,7 +1,8 @@
 import 'dotenv/config';
 
-import { createServer } from './server';
 import { log } from '@repo/logger/src';
+
+import { createServer } from './server';
 
 const port = 3001;
 const server = createServer();

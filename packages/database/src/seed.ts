@@ -1,6 +1,6 @@
-import { prisma } from './client';
+import type { Author, Book,Language, Status, User } from '@prisma/client';
 
-import type { User, Language, Status, Author, Book } from '@prisma/client';
+import { prisma } from './client';
 
 const DEFAULT_USERS = [
     {

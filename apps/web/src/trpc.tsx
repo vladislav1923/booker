@@ -1,13 +1,13 @@
 'use client';
 
 import { TRPCRouter } from '@repo/trpc';
-import {
-    // createTRPCProxyClient,
-    createTRPCReact,
-    type CreateTRPCReact,
-} from '@trpc/react-query';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { httpBatchLink } from '@trpc/client';
+import {
+    type CreateTRPCReact,
+    // createTRPCProxyClient,
+    createTRPCReact,
+} from '@trpc/react-query';
 
 export const trpc: CreateTRPCReact<TRPCRouter, unknown, unknown> =
     createTRPCReact<TRPCRouter>();

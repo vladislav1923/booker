@@ -1,5 +1,5 @@
-import usersRoutes from './users';
 import authorsRoutes from './authors';
+import usersRoutes from './users';
 
 const routes = {
     ...authorsRoutes,

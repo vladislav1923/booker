@@ -1,6 +1,7 @@
-import { trpc } from '../../instance';
 import { z } from 'zod';
+
 import { BadRequestError, Errors } from '../../errors';
+import { trpc } from '../../instance';
 
 const schema = z.object({
     email: z.string().email().describe('Email'),

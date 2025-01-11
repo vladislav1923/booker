@@ -1,8 +1,8 @@
-import { getAuthorTRPCRoute } from './getAuthor';
 import { createAuthorTRPCRoute } from './createAuthor';
-import { updateAuthorTRPCRoute } from './updateAuthor';
 import { deleteAuthorTRPCRoute } from './deleteAuthor';
+import { getAuthorTRPCRoute } from './getAuthor';
 import { getAuthorsByUserIdTRPCRoute } from './getAuthorsByUserId';
+import { updateAuthorTRPCRoute } from './updateAuthor';
 
 const authorsRoutes = {
     getAuthor: getAuthorTRPCRoute,

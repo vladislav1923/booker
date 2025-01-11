@@ -1,6 +1,6 @@
 import crypto from 'crypto';
-import jwt from 'jsonwebtoken';
 import { Request } from 'express';
+import jwt from 'jsonwebtoken';
 
 const generatePasswordDigest = (password: string): string => {
     return crypto.createHash('sha256').update(password).digest('hex');

@@ -1,7 +1,7 @@
-import { signUpTRPCRoute } from './signUp';
-import { loginTRPCRoute } from './login';
 import { getCurrentUserTRPCRoute } from './getCurrentUser';
+import { loginTRPCRoute } from './login';
 import { logoutTRPCRoute } from './logout';
+import { signUpTRPCRoute } from './signUp';
 
 const userRoutes = {
     signUp: signUpTRPCRoute,

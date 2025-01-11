@@ -18,7 +18,7 @@ module.exports = {
   env: {
     node: true,
   },
-  plugins: ["only-warn"],
+  plugins: ["only-warn", "simple-import-sort"],
   settings: {
     "import/resolver": {
       typescript: {
@@ -32,7 +32,9 @@ module.exports = {
     "node_modules/",
   ],
   rules: {
-    quotes: ["error", "single"],
+    "quotes": ["error", "single"],
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error"
   },
   overrides: [
     { files: ["*.js?(x)", "*.ts?(x)"] },

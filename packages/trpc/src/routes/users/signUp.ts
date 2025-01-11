@@ -1,6 +1,7 @@
-import { trpc } from '../../instance';
 import { z } from 'zod';
+
 import { BadRequestError, Errors } from '../../errors';
+import { trpc } from '../../instance';
 
 const schema = z.object({
     firstName: z.string().min(2).max(20).describe('First name'),

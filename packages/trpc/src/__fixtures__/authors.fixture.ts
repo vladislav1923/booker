@@ -1,4 +1,5 @@
 import { Author } from '@prisma/client';
+
 import { USER } from './users.fixture';
 
 const AUTHOR: Author = {

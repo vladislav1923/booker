@@ -1,7 +1,8 @@
-import { Passport } from 'passport';
-import { NextFunction, Request, Response } from 'express';
-import { Strategy as JWTStrategy } from 'passport-jwt';
 import { prisma } from '@repo/database';
+import { NextFunction, Request, Response } from 'express';
+import { Passport } from 'passport';
+import { Strategy as JWTStrategy } from 'passport-jwt';
+
 import { tokenExtractor } from '../utlis/authorization';
 
 const passport = new Passport();

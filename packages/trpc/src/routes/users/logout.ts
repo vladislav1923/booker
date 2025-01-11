@@ -1,5 +1,5 @@
-import { trpc } from '../../instance';
 import { Errors, ForbiddenError } from '../../errors';
+import { trpc } from '../../instance';
 
 export const logoutTRPCRoute = trpc.procedure
     .meta({ description: 'Logout the current user' })

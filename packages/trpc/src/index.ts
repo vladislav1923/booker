@@ -1,7 +1,7 @@
 import { trpc } from './instance';
+import routes from './routes';
 import { getMessageTrpcRoute } from './routes/getMessage';
 import { getMessagesTrpcRoute } from './routes/getMessages';
-import routes from './routes';
 
 export const trpcRouter = trpc.router({
     ...routes,
