@@ -1,7 +1,9 @@
-import userRoutes from './users';
+import usersRoutes from './users';
+import authorsRoutes from './authors';
 
 const routes = {
-    ...userRoutes,
+    ...authorsRoutes,
+    ...usersRoutes,
 };
 
 export default routes;

@@ -6,6 +6,7 @@ export enum Errors {
     UserNotFound,
     IncorrectEmailOrPassword,
     NotAuthorized,
+    AuthorNotFound,
 }
 
 export class BadRequestError extends TRPCError {
@@ -22,6 +23,15 @@ export class ForbiddenError extends TRPCError {
 
     constructor(status: Errors, message?: string) {
         super({ code: 'FORBIDDEN', message });
+        this.status = status;
+    }
+}
+
+export class NotFoundError extends TRPCError {
+    public status: Errors;
+
+    constructor(status: Errors, message?: string) {
+        super({ code: 'NOT_FOUND', message });
         this.status = status;
     }
 }
