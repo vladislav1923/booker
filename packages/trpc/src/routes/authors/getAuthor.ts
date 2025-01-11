@@ -6,8 +6,10 @@ const schema = z.object({
     authorId: z.string(),
 });
 
-export const getAuthorByIdTRPCRoute = trpc.procedure
-    .meta({ description: 'Returns the current authorized user' })
+export type GetAuthorInput = z.infer<typeof schema>;
+
+export const getAuthorTRPCRoute = trpc.procedure
+    .meta({ description: 'Returns an author' })
     .input(schema)
     .query(async ({ ctx, input }) => {
         if (!ctx.authorized) {

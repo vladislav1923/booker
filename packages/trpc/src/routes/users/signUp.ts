@@ -14,6 +14,8 @@ const schema = z.object({
         .describe('Password confirmation'),
 });
 
+export type SignUpInput = z.infer<typeof schema>;
+
 export const signUpTRPCRoute = trpc.procedure
     .meta({ description: 'Create a new user' })
     .input(schema)

@@ -5,8 +5,15 @@ import { Context } from '../../context';
 import { trpcRouter } from '../../index';
 import { Errors, ForbiddenError } from '../../errors';
 import { AUTHOR } from '../../__fixtures__/authors.fixture';
+import { USER } from '../../__fixtures__/users.fixture';
+import { UpdateAuthorInput } from '../../routes/authors/updateAuthor';
 
-describe('@repo/trpc -> Authors -> GetAuthorById', () => {
+describe('@repo/trpc -> Authors -> UpdateAuthor', () => {
+    const INPUT: UpdateAuthorInput = {
+        authorId: AUTHOR.id,
+        firstName: AUTHOR.firstName,
+        lastName: AUTHOR.lastName,
+    };
     let mockCtx: MockContext;
     let ctx: Context;
 
@@ -15,18 +22,17 @@ describe('@repo/trpc -> Authors -> GetAuthorById', () => {
         ctx = mockCtx as unknown as Context;
     });
 
-    it('should return an author', async () => {
+    it('should update an author', async () => {
         mockCtx.authorized = true;
+        mockCtx.user = USER;
 
         const expectedResult = {
             author: AUTHOR,
         };
 
-        mockCtx.prisma.author.findUnique.mockResolvedValue(AUTHOR);
+        mockCtx.prisma.author.update.mockResolvedValue(AUTHOR);
 
-        const result = await trpcRouter
-            .createCaller(ctx)
-            .getAuthorById({ authorId: AUTHOR.id });
+        const result = await trpcRouter.createCaller(ctx).updateAuthor(INPUT);
 
         expect(result).toEqual(expectedResult);
     });
@@ -35,9 +41,7 @@ describe('@repo/trpc -> Authors -> GetAuthorById', () => {
         mockCtx.authorized = false;
 
         try {
-            await trpcRouter
-                .createCaller(ctx)
-                .getAuthorById({ authorId: AUTHOR.id });
+            await trpcRouter.createCaller(ctx).updateAuthor(INPUT);
             expect(true).toBeFalsy();
         } catch (error: any) {
             expect(error).toBeInstanceOf(ForbiddenError);
@@ -51,7 +55,7 @@ describe('@repo/trpc -> Authors -> GetAuthorById', () => {
         try {
             await trpcRouter
                 .createCaller(ctx)
-                .getAuthorById({} as { authorId: string });
+                .updateAuthor({} as UpdateAuthorInput);
             expect(true).toBeFalsy();
         } catch (error: any) {
             expect(error).toBeInstanceOf(TRPCError);

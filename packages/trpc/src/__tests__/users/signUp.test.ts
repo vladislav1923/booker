@@ -9,9 +9,10 @@ import {
     USER_RESPONSE,
     WRONG_PASSWORD,
 } from '../../__fixtures__/users.fixture';
+import { SignUpInput } from '../../routes/users/signUp';
 
 describe('@repo/trpc -> Users -> Sign Up', () => {
-    const INPUT = {
+    const INPUT: SignUpInput = {
         firstName: USER.firstName,
         lastName: USER.lastName,
         email: USER.email,

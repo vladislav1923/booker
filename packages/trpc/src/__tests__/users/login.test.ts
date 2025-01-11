@@ -10,9 +10,10 @@ import {
     WRONG_PASSWORD_DIGEST,
 } from '../../__fixtures__/users.fixture';
 import { BadRequestError, Errors } from '../../errors';
+import { LoginInput } from '../../routes/users/login';
 
 describe('@repo/trpc -> Users -> Login', () => {
-    const INPUT = {
+    const INPUT: LoginInput = {
         email: USER.email,
         password: PASSWORD,
     };

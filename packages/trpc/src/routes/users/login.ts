@@ -7,6 +7,8 @@ const schema = z.object({
     password: z.string().min(6).max(20).describe('Password'),
 });
 
+export type LoginInput = z.infer<typeof schema>;
+
 const EXPIRES_IN = 1000 * 60 * 60 * 24;
 
 export const loginTRPCRoute = trpc.procedure
