@@ -58,7 +58,7 @@ model Author {
 model Book {
   id          String   @id @default(cuid())
   title       String
-  description String
+  description String?
   authorId    String   @map("author_id")
   author      Author   @relation(fields: [authorId], references: [id])
   languageId  String   @map("language_id")

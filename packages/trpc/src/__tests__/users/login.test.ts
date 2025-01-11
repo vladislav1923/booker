@@ -48,7 +48,7 @@ describe('@repo/trpc -> Users -> Login', () => {
             expect(true).toBeFalsy();
         } catch (error: any) {
             expect(error).toBeInstanceOf(BadRequestError);
-            expect(error.status).toBe(Errors.UserNotFound);
+            expect(error.status).toBe(Errors.NotFound);
         }
     });
 

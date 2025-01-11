@@ -3,10 +3,9 @@ import { TRPCError } from '@trpc/server';
 export enum Errors {
     UserAlreadyExists,
     PasswordsDoNotMatch,
-    UserNotFound,
     IncorrectEmailOrPassword,
     NotAuthorized,
-    AuthorNotFound,
+    NotFound,
 }
 
 export class BadRequestError extends TRPCError {

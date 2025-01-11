@@ -4,30 +4,30 @@ import { Errors, ForbiddenError, NotFoundError } from '../../errors';
 import { trpc } from '../../instance';
 
 const schema = z.object({
-    authorId: z.string(),
+    bookId: z.string(),
 });
 
-export type GetAuthorInput = z.infer<typeof schema>;
+export type GetBookInput = z.infer<typeof schema>;
 
-export const getAuthorTRPCRoute = trpc.procedure
-    .meta({ description: 'Returns an author' })
+export const getBookTRPCRoute = trpc.procedure
+    .meta({ description: 'Returns a book' })
     .input(schema)
     .query(async ({ ctx, input }) => {
         if (!ctx.authorized) {
             throw new ForbiddenError(Errors.NotAuthorized);
         }
 
-        const author = await ctx.prisma.author.findUnique({
+        const book = await ctx.prisma.book.findUnique({
             where: {
-                id: input.authorId,
+                id: input.bookId,
             },
         });
 
-        if (!author) {
+        if (!book) {
             throw new NotFoundError(Errors.NotFound);
         }
 
         return {
-            author,
+            book,
         };
     });

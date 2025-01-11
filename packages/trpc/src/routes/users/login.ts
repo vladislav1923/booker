@@ -23,7 +23,7 @@ export const loginTRPCRoute = trpc.procedure
         });
 
         if (!user) {
-            throw new BadRequestError(Errors.UserNotFound);
+            throw new BadRequestError(Errors.NotFound);
         }
 
         const passwordDigest = ctx.generatePasswordDigest(input.password);
