@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@repo/ui/button';
-import { ChangeEvent, FormEvent,useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 
 import { trpc } from '../trpc';
 

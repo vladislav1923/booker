@@ -1,12 +1,12 @@
 import { createAuthorTRPCRoute } from './createAuthor';
 import { deleteAuthorTRPCRoute } from './deleteAuthor';
 import { getAuthorTRPCRoute } from './getAuthor';
-import { getAuthorsByUserIdTRPCRoute } from './getAuthorsByUserId';
+import { getAuthorsByUserTRPCRoute } from './getAuthorsByUser';
 import { updateAuthorTRPCRoute } from './updateAuthor';
 
 const authorsRoutes = {
     getAuthor: getAuthorTRPCRoute,
-    getAuthorsByUserId: getAuthorsByUserIdTRPCRoute,
+    getAuthorsByUser: getAuthorsByUserTRPCRoute,
     createAuthor: createAuthorTRPCRoute,
     updateAuthor: updateAuthorTRPCRoute,
     deleteAuthor: deleteAuthorTRPCRoute,

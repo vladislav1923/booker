@@ -1,4 +1,4 @@
-import type { Author, Book,Language, Status, User } from '@prisma/client';
+import type { Author, Book, Language, Status, User } from '@prisma/client';
 
 import { prisma } from './client';
 
