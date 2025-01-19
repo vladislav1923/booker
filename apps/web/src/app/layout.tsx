@@ -1,3 +1,5 @@
+import './globals.css';
+
 import { TrpcProvider } from '../trpc';
 
 export default function RootLayout({

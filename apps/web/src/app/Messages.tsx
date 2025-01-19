@@ -19,7 +19,7 @@ export const Messages = async () => {
             <h1>Messages</h1>
             <ul>
                 {messages.map((message) => (
-                    <li key={message.id}>{message.text}</li>
+                    <li className="text-5xl" key={message.id}>{message.text}</li>
                 ))}
             </ul>
         </div>
