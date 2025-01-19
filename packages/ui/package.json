@@ -10,7 +10,9 @@
   "exports": {
     "./globals.css": "./dist/index.css",
     "./button": "./src/button.tsx",
-    "./card": "./src/card.tsx"
+    "./card": "./src/card.tsx",
+    "./input": "./src/input.tsx",
+    "./label": "./src/label.tsx"
   },
   "scripts": {
     "build": "tailwindcss -i ./src/globals.css -o ./dist/index.css",
@@ -29,7 +31,10 @@
     "typescript": "5.5.4"
   },
   "dependencies": {
+    "@radix-ui/react-label": "^2.1.1",
+    "@radix-ui/react-slot": "^1.1.1",
+    "class-variance-authority": "^0.7.1",
     "classnames": "^2.5.1",
-    "react": "^18.2.0"
+    "react": "^19.0.0-rc.1"
   }
 }
