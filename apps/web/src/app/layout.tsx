@@ -1,4 +1,5 @@
 import './globals.css';
+import '@repo/ui/globals.css';
 
 import { TrpcProvider } from '../trpc';
 
