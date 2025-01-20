@@ -9,8 +9,6 @@ export default function Web() {
             <Messages />
 
             <Form />
-
-
         </div>
     );
 }

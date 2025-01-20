@@ -6,5 +6,5 @@ module.exports = {
   parserOptions: {
     project: true,
   },
-  ignorePatterns: ["next.config.js"],
+  ignorePatterns: ["next.config.js", "postcss.config.js"],
 };
