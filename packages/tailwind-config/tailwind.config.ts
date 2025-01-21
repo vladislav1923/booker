@@ -4,6 +4,7 @@ const config: Omit<Config, 'content'> = {
     theme: {
         colors: {
             primary: 'blue',
+            'primary-foreground': '#fff'
         },
     },
     plugins: [],
