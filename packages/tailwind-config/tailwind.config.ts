@@ -5,9 +5,9 @@ const config: Omit<Config, 'content'> = {
         extends: {
             colors: {
                 primary: 'blue',
-                'primary-foreground': '#fff'
+                'primary-foreground': '#fff',
             },
-        }
+        },
     },
     plugins: [],
 };
