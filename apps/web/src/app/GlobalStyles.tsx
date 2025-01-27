@@ -1,8 +1,5 @@
 'use client';
 
-import './globals.css';
-import '@repo/ui/globals.css';
-
 import { Roboto } from 'next/font/google';
 
 const roboto = Roboto({

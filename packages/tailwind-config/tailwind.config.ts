@@ -4,7 +4,7 @@ const config: Omit<Config, 'content'> = {
     theme: {
         extends: {
             colors: {
-                primary: 'blue',
+                primaryy: 'blue',
                 'primary-foreground': '#fff',
             },
         },

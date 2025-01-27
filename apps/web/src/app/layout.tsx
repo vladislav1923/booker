@@ -1,3 +1,6 @@
+import './globals.css';
+import '@repo/ui/styles.css';
+
 import { TrpcProvider } from '../trpc';
 import { GlobalStyles } from './GlobalStyles';
 
