@@ -13,7 +13,7 @@ type Values = {
     password: string;
     confirmPassword: string;
     // marketingAccept: number;
-}
+};
 
 const initialValues: Values = {
     firstName: '',
@@ -22,7 +22,7 @@ const initialValues: Values = {
     password: '',
     confirmPassword: '',
     // marketingAccept: true,
-}
+};
 
 const SignUpForm = () => {
     const signUp = trpc.signUp.useMutation();
@@ -97,9 +97,7 @@ const SignUpForm = () => {
             </div>
 
             <div className="col-span-6 sm:col-span-3">
-                <Label htmlFor="confirmPassword">
-                    Confirm Password
-                </Label>
+                <Label htmlFor="confirmPassword">Confirm Password</Label>
                 <Input
                     id="confirmPassword"
                     name="confirmPassword"
@@ -130,17 +128,11 @@ const SignUpForm = () => {
             <div className="col-span-6">
                 <p className="text-sm text-gray-500">
                     By creating an account, you agree to our
-                    <a
-                        href="#"
-                        className="text-gray-700 underline px-1"
-                    >
+                    <a href="#" className="text-gray-700 underline px-1">
                         terms and conditions
                     </a>
                     and
-                    <a
-                        href="#"
-                        className="text-gray-700 underline px-1"
-                    >
+                    <a href="#" className="text-gray-700 underline px-1">
                         privacy policy
                     </a>
                     .
@@ -148,14 +140,13 @@ const SignUpForm = () => {
             </div>
 
             <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
-                <Button size="lg" disabled={isSubmitting} type="submit">Create an account</Button>
+                <Button size="lg" disabled={isSubmitting} type="submit">
+                    Create an account
+                </Button>
 
                 <p className="mt-4 text-sm text-gray-500 sm:mt-0">
                     Already have an account?
-                    <a
-                        href="#"
-                        className="text-gray-700 underline px-1"
-                    >
+                    <a href="#" className="text-gray-700 underline px-1">
                         Log in
                     </a>
                     .
@@ -165,10 +156,7 @@ const SignUpForm = () => {
     );
 
     return (
-        <Formik
-            initialValues={initialValues}
-            onSubmit={submitHandler}
-        >
+        <Formik initialValues={initialValues} onSubmit={submitHandler}>
             {renderForm}
         </Formik>
     );

@@ -59,6 +59,6 @@ const SignUpPage = () => {
             </div>
         </section>
     );
-}
+};
 
 export default SignUpPage;
