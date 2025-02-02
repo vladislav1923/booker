@@ -20,9 +20,6 @@
     "lint": "eslint \"**/*.ts*\" --max-warnings 0",
     "dev": "tailwindcss -i ./src/styles.css -o ./dist/index.css --watch"
   },
-  "peerDependencies": {
-    "react": "19.0.2"
-  },
   "devDependencies": {
     "@repo/eslint-config": "*",
     "@repo/tailwind-config": "*",

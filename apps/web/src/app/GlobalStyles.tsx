@@ -6,7 +6,6 @@ const roboto = Roboto({
     weight: ['400', '500', '700'],
     style: ['normal'],
     subsets: ['latin', 'cyrillic'],
-    display: 'swap',
 });
 
 export function GlobalStyles() {
