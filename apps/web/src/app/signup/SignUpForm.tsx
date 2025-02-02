@@ -1,10 +1,8 @@
 'use client';
 import { Button } from '@repo/ui/button';
-import { Checkbox } from '@repo/ui/checkbox';
 import { Input } from '@repo/ui/input';
 import { Label } from '@repo/ui/label';
 import { Formik, FormikHelpers, FormikProps } from 'formik';
-import { FormikHandlers } from 'formik/dist/types';
 
 import { trpc } from '../../trpc';
 
@@ -15,6 +13,15 @@ type Values = {
     password: string;
     confirmPassword: string;
     // marketingAccept: number;
+}
+
+const initialValues: Values = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    // marketingAccept: true,
 }
 
 const SignUpForm = () => {
@@ -159,14 +166,7 @@ const SignUpForm = () => {
 
     return (
         <Formik
-            initialValues={{
-                firstName: '',
-                lastName: '',
-                email: '',
-                password: '',
-                confirmPassword: '',
-                // marketingAccept: true,
-            }}
+            initialValues={initialValues}
             onSubmit={submitHandler}
         >
             {renderForm}
