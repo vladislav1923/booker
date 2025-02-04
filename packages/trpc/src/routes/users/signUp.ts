@@ -13,6 +13,9 @@ const schema = z.object({
         .min(6)
         .max(20)
         .describe('Password confirmation'),
+}).refine((data) => data.password === data.confirmPassword, {
+    message: 'Passwords do not match',
+    path: ['confirmPassword'],
 });
 
 export type SignUpInput = z.infer<typeof schema>;

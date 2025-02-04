@@ -2,7 +2,8 @@
 import { Button } from '@repo/ui/button';
 import { Input } from '@repo/ui/input';
 import { Label } from '@repo/ui/label';
-import { Formik, FormikHelpers, FormikProps } from 'formik';
+import { TRPCClientError } from '@trpc/client';
+import { Form,Formik, FormikHelpers, FormikProps } from 'formik';
 
 import { trpc } from '../../trpc';
 
@@ -29,9 +30,20 @@ const SignUpForm = () => {
 
     const submitHandler = async (
         values: Values,
-        { setSubmitting }: FormikHelpers<Values>
+        { setSubmitting, setErrors }: FormikHelpers<Values>
     ) => {
-        console.log('Values: ', values);
+        setSubmitting(true);
+        try {
+            const response = await signUp.mutateAsync(values);
+            console.log('RESPONSE FROM SIGNUP', response);
+        } catch (error: unknown) {
+            if (error instanceof TRPCClientError) {
+                console.log('error?.data?.zodError?.fieldErrors: ', error?.data?.zodError?.fieldErrors);
+                setErrors({ ...error?.data?.zodError?.fieldErrors });
+            }
+        } finally {
+            setSubmitting(false);
+        }
     };
 
     const renderForm = ({
@@ -40,10 +52,9 @@ const SignUpForm = () => {
         touched,
         handleChange,
         handleBlur,
-        handleSubmit,
         isSubmitting,
     }: FormikProps<Values>) => (
-        <form className="mt-8 grid grid-cols-6 gap-6" onSubmit={handleSubmit}>
+        <Form className="mt-8 grid grid-cols-6 gap-6" noValidate>
             <div className="col-span-6 sm:col-span-3">
                 <Label htmlFor="firstName">First Name</Label>
                 <Input
@@ -55,6 +66,9 @@ const SignUpForm = () => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                 />
+                {errors.firstName && touched.firstName && (
+                    <p className="mt-2 text-sm text-red-500">{errors.firstName}</p>
+                )}
             </div>
 
             <div className="col-span-6 sm:col-span-3">
@@ -68,6 +82,9 @@ const SignUpForm = () => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                 />
+                {errors.lastName && touched.lastName && (
+                    <p className="mt-2 text-sm text-red-500">{errors.lastName}</p>
+                )}
             </div>
 
             <div className="col-span-6">
@@ -81,6 +98,9 @@ const SignUpForm = () => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                 />
+                {errors.email && touched.email && (
+                    <p className="mt-2 text-sm text-red-500">{errors.email}</p>
+                )}
             </div>
 
             <div className="col-span-6 sm:col-span-3">
@@ -94,6 +114,9 @@ const SignUpForm = () => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                 />
+                {errors.password && touched.password && (
+                    <p className="mt-2 text-sm text-red-500">{errors.password}</p>
+                )}
             </div>
 
             <div className="col-span-6 sm:col-span-3">
@@ -107,6 +130,9 @@ const SignUpForm = () => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                 />
+                {errors.confirmPassword && touched.confirmPassword && (
+                    <p className="mt-2 text-sm text-red-500">{errors.confirmPassword}</p>
+                )}
             </div>
 
             {/*<div className="col-span-6 flex gap-1">*/}
@@ -152,7 +178,7 @@ const SignUpForm = () => {
                     .
                 </p>
             </div>
-        </form>
+        </Form>
     );
 
     return (
