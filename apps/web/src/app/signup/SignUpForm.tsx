@@ -1,5 +1,6 @@
 'use client';
 import { Button } from '@repo/ui/button';
+import { Checkbox } from '@repo/ui/checkbox';
 import { Input } from '@repo/ui/input';
 import { Label } from '@repo/ui/label';
 import { TRPCClientError } from '@trpc/client';
@@ -13,7 +14,7 @@ type Values = {
     email: string;
     password: string;
     confirmPassword: string;
-    // marketingAccept: number;
+    marketingAccept: boolean;
 };
 
 const initialValues: Values = {
@@ -22,7 +23,7 @@ const initialValues: Values = {
     email: '',
     password: '',
     confirmPassword: '',
-    // marketingAccept: true,
+    marketingAccept: true,
 };
 
 const SignUpForm = () => {
@@ -33,9 +34,9 @@ const SignUpForm = () => {
         { setSubmitting, setErrors }: FormikHelpers<Values>
     ) => {
         setSubmitting(true);
+        
         try {
             const response = await signUp.mutateAsync(values);
-            console.log('RESPONSE FROM SIGNUP', response);
         } catch (error: unknown) {
             if (error instanceof TRPCClientError) {
                 setErrors({ ...error?.data?.zodError?.fieldErrors });
@@ -50,6 +51,7 @@ const SignUpForm = () => {
         errors,
         touched,
         handleChange,
+        setFieldValue,
         handleBlur,
         isSubmitting,
     }: FormikProps<Values>) => (
@@ -142,21 +144,20 @@ const SignUpForm = () => {
                 )}
             </div>
 
-            {/*<div className="col-span-6 flex gap-1">*/}
-            {/*    <Checkbox*/}
-            {/*        id="marketingAccept"*/}
-            {/*        value={values.marketingAccept}*/}
-            {/*        onChange={handleChange}*/}
-            {/*        onBlur={handleBlur}*/}
-            {/*    />*/}
-            {/*    <Label htmlFor="marketingAccept">*/}
-            {/*        <span className="font-normal leading-5 text-gray-500">*/}
-            {/*            I want to receive emails about events,*/}
-            {/*            product updates and service*/}
-            {/*            announcements.*/}
-            {/*        </span>*/}
-            {/*    </Label>*/}
-            {/*</div>*/}
+            <div className="col-span-6 flex gap-1">
+                <Checkbox
+                    id="marketingAccept"
+                    checked={values.marketingAccept}
+                    onCheckedChange={(checked: boolean) => setFieldValue('marketingAccept', checked)}
+                />
+                <Label htmlFor="marketingAccept">
+                    <span className="font-normal leading-5 text-gray-500">
+                        I want to receive emails about events,
+                        product updates and service
+                        announcements.
+                    </span>
+                </Label>
+            </div>
 
             <div className="col-span-6">
                 <p className="text-sm text-gray-500">
