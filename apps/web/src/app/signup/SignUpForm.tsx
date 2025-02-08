@@ -37,6 +37,7 @@ const SignUpForm = () => {
 
         try {
             const response = await signUp.mutateAsync(values);
+            console.log('REPONSE: ', response);
         } catch (error: unknown) {
             if (error instanceof TRPCClientError) {
                 setErrors({ ...error?.data?.zodError?.fieldErrors });
