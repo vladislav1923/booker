@@ -17,7 +17,8 @@
     "predev": "yarn generate",
     "studio": "prisma studio",
     "lint": "tsc --noEmit && eslint \"src/**/*.ts*\" --max-warnings 0",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "type-check": "tsc --noEmit"
   },
   "devDependencies": {
     "@repo/eslint-config": "*",

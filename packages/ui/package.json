@@ -19,7 +19,8 @@
   "scripts": {
     "build": "tailwindcss -i ./src/styles.css -o ./dist/index.css",
     "lint": "eslint \"**/*.ts*\" --max-warnings 0",
-    "dev": "tailwindcss -i ./src/styles.css -o ./dist/index.css --watch"
+    "dev": "tailwindcss -i ./src/styles.css -o ./dist/index.css --watch",
+    "type-check": "tsc --noEmit"
   },
   "devDependencies": {
     "@repo/eslint-config": "*",

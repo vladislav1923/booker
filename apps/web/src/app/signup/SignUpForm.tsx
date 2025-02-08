@@ -34,7 +34,7 @@ const SignUpForm = () => {
         { setSubmitting, setErrors }: FormikHelpers<Values>
     ) => {
         setSubmitting(true);
-        
+
         try {
             const response = await signUp.mutateAsync(values);
         } catch (error: unknown) {

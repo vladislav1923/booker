@@ -24,5 +24,7 @@ jobs:
         run: yarn install
       - name: Run Linter
         run: npm run lint
+      - name: Types Check
+        run: npm run type-check
       - name: Run Unit Tests
         run: npm test

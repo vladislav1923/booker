@@ -19,6 +19,7 @@ const USER: User = {
     lastName: 'Doe',
     email: 'john.doe@gmail.com',
     passwordDigest: PASSWORD_DIGEST,
+    marketingAccept: true,
     createdAt: new Date(),
     updatedAt: new Date(),
 };
