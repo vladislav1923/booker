@@ -40,7 +40,7 @@ describe('@repo/trpc -> Books -> DeleteBook', () => {
             expect(true).toBeFalsy();
         } catch (error: any) {
             expect(error).toBeInstanceOf(TRPCError);
-            expect(error.status).toBe('UNAUTHORIZED');
+            expect(error.code).toBe('UNAUTHORIZED');
         }
     });
 
