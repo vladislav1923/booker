@@ -3,20 +3,22 @@ import { z } from 'zod';
 
 import { trpc } from '../../instance';
 
-const schema = z.object({
-    firstName: z.string().min(2).max(20).describe('First name'),
-    lastName: z.string().min(2).max(20).describe('Last name'),
-    email: z.string().email().describe('Email'),
-    password: z.string().min(6).max(20).describe('Password'),
-    confirmPassword: z
-        .string()
-        .min(6)
-        .max(20)
-        .describe('Password confirmation'),
-}).refine((data) => data.password === data.confirmPassword, {
-    message: 'Passwords do not match',
-    path: ['confirmPassword'],
-});
+const schema = z
+    .object({
+        firstName: z.string().min(2).max(20).describe('First name'),
+        lastName: z.string().min(2).max(20).describe('Last name'),
+        email: z.string().email().describe('Email'),
+        password: z.string().min(6).max(20).describe('Password'),
+        confirmPassword: z
+            .string()
+            .min(6)
+            .max(20)
+            .describe('Password confirmation'),
+    })
+    .refine((data) => data.password === data.confirmPassword, {
+        message: 'Passwords do not match',
+        path: ['confirmPassword'],
+    });
 
 export type SignUpInput = z.infer<typeof schema>;
 

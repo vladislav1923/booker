@@ -3,7 +3,7 @@ import { Button } from '@repo/ui/button';
 import { Input } from '@repo/ui/input';
 import { Label } from '@repo/ui/label';
 import { TRPCClientError } from '@trpc/client';
-import { Form,Formik, FormikHelpers, FormikProps } from 'formik';
+import { Form, Formik, FormikHelpers, FormikProps } from 'formik';
 
 import { trpc } from '../../trpc';
 
@@ -38,7 +38,6 @@ const SignUpForm = () => {
             console.log('RESPONSE FROM SIGNUP', response);
         } catch (error: unknown) {
             if (error instanceof TRPCClientError) {
-                console.log('error?.data?.zodError?.fieldErrors: ', error?.data?.zodError?.fieldErrors);
                 setErrors({ ...error?.data?.zodError?.fieldErrors });
             }
         } finally {
@@ -67,7 +66,9 @@ const SignUpForm = () => {
                     onBlur={handleBlur}
                 />
                 {errors.firstName && touched.firstName && (
-                    <p className="mt-2 text-sm text-red-500">{errors.firstName}</p>
+                    <p className="mt-2 text-sm text-red-500">
+                        {errors.firstName}
+                    </p>
                 )}
             </div>
 
@@ -83,7 +84,9 @@ const SignUpForm = () => {
                     onBlur={handleBlur}
                 />
                 {errors.lastName && touched.lastName && (
-                    <p className="mt-2 text-sm text-red-500">{errors.lastName}</p>
+                    <p className="mt-2 text-sm text-red-500">
+                        {errors.lastName}
+                    </p>
                 )}
             </div>
 
@@ -115,7 +118,9 @@ const SignUpForm = () => {
                     onBlur={handleBlur}
                 />
                 {errors.password && touched.password && (
-                    <p className="mt-2 text-sm text-red-500">{errors.password}</p>
+                    <p className="mt-2 text-sm text-red-500">
+                        {errors.password}
+                    </p>
                 )}
             </div>
 
@@ -131,7 +136,9 @@ const SignUpForm = () => {
                     onBlur={handleBlur}
                 />
                 {errors.confirmPassword && touched.confirmPassword && (
-                    <p className="mt-2 text-sm text-red-500">{errors.confirmPassword}</p>
+                    <p className="mt-2 text-sm text-red-500">
+                        {errors.confirmPassword}
+                    </p>
                 )}
             </div>
 
