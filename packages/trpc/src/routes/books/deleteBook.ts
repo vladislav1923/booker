@@ -1,6 +1,6 @@
+import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 
-import { Errors, ForbiddenError } from '../../errors';
 import { trpc } from '../../instance';
 
 const schema = z.object({
@@ -14,7 +14,7 @@ export const deleteBookTRPCRoute = trpc.procedure
     .input(schema)
     .mutation(async ({ ctx, input }) => {
         if (!ctx.authorized) {
-            throw new ForbiddenError(Errors.NotAuthorized);
+            throw new TRPCError({ code: 'UNAUTHORIZED' });
         }
 
         await ctx.prisma.book.delete({

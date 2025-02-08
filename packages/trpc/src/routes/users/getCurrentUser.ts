@@ -1,13 +1,13 @@
 import { User } from '@prisma/client';
+import { TRPCError } from '@trpc/server';
 
-import { Errors, ForbiddenError } from '../../errors';
 import { trpc } from '../../instance';
 
 export const getCurrentUserTRPCRoute = trpc.procedure
     .meta({ description: 'Returns the current authorized user' })
     .query(async ({ ctx }) => {
         if (!ctx.authorized || !ctx.user) {
-            throw new ForbiddenError(Errors.NotAuthorized);
+            throw new TRPCError({ code: 'UNAUTHORIZED' });
         }
 
         const user: User = ctx.user;

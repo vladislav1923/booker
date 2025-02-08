@@ -1,6 +1,6 @@
+import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 
-import { BadRequestError, Errors } from '../../errors';
 import { trpc } from '../../instance';
 
 const schema = z.object({
@@ -23,13 +23,13 @@ export const loginTRPCRoute = trpc.procedure
         });
 
         if (!user) {
-            throw new BadRequestError(Errors.NotFound);
+            throw new TRPCError({ code: 'NOT_FOUND' });
         }
 
         const passwordDigest = ctx.generatePasswordDigest(input.password);
 
         if (passwordDigest !== user.passwordDigest) {
-            throw new BadRequestError(Errors.IncorrectEmailOrPassword);
+            throw new TRPCError({ code: 'BAD_REQUEST' });
         }
 
         const token = ctx.signJWT(user.id);

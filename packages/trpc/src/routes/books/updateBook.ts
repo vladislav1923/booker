@@ -1,6 +1,6 @@
+import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 
-import { Errors, ForbiddenError } from '../../errors';
 import { trpc } from '../../instance';
 
 const schema = z.object({
@@ -19,7 +19,7 @@ export const updateBookTRPCRoute = trpc.procedure
     .input(schema)
     .mutation(async ({ input, ctx }) => {
         if (!ctx.authorized || !ctx.user) {
-            throw new ForbiddenError(Errors.NotAuthorized);
+            throw new TRPCError({ code: 'UNAUTHORIZED' });
         }
 
         const updatedBook = await ctx.prisma.book.update({

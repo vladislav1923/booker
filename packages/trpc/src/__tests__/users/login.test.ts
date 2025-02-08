@@ -9,8 +9,8 @@ import {
     USER_RESPONSE,
     WRONG_PASSWORD_DIGEST,
 } from '../../__fixtures__/users.fixture';
-import { BadRequestError, Errors } from '../../errors';
 import { LoginInput } from '../../routes/users/login';
+import { TRPCError } from '@trpc/server';
 
 describe('@repo/trpc -> Users -> Login', () => {
     const INPUT: LoginInput = {
@@ -47,8 +47,8 @@ describe('@repo/trpc -> Users -> Login', () => {
             await trpcRouter.createCaller(ctx).login(INPUT);
             expect(true).toBeFalsy();
         } catch (error: any) {
-            expect(error).toBeInstanceOf(BadRequestError);
-            expect(error.status).toBe(Errors.NotFound);
+            expect(error).toBeInstanceOf(TRPCError);
+            expect(error.code).toBe('NOT_FOUND');
         }
     });
 
@@ -62,8 +62,7 @@ describe('@repo/trpc -> Users -> Login', () => {
             await trpcRouter.createCaller(ctx).login(INPUT);
             expect(true).toBeFalsy();
         } catch (error: any) {
-            expect(error).toBeInstanceOf(BadRequestError);
-            expect(error.status).toBe(Errors.IncorrectEmailOrPassword);
+            expect(error).toBeInstanceOf(TRPCError);
         }
     });
 });

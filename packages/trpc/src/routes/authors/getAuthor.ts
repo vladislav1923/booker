@@ -1,6 +1,6 @@
+import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 
-import { Errors, ForbiddenError, NotFoundError } from '../../errors';
 import { trpc } from '../../instance';
 
 const schema = z.object({
@@ -14,7 +14,7 @@ export const getAuthorTRPCRoute = trpc.procedure
     .input(schema)
     .query(async ({ ctx, input }) => {
         if (!ctx.authorized) {
-            throw new ForbiddenError(Errors.NotAuthorized);
+            throw new TRPCError({ code: 'UNAUTHORIZED' });
         }
 
         const author = await ctx.prisma.author.findUnique({
@@ -24,7 +24,7 @@ export const getAuthorTRPCRoute = trpc.procedure
         });
 
         if (!author) {
-            throw new NotFoundError(Errors.NotFound);
+            throw new TRPCError({ code: 'NOT_FOUND' });
         }
 
         return {

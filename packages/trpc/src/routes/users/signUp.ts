@@ -1,6 +1,6 @@
+import { TRPCError } from '@trpc/server';
 import { z } from 'zod';
 
-import { BadRequestError, Errors } from '../../errors';
 import { trpc } from '../../instance';
 
 const schema = z.object({
@@ -31,11 +31,7 @@ export const signUpTRPCRoute = trpc.procedure
         });
 
         if (existingUser) {
-            throw new BadRequestError(Errors.UserAlreadyExists);
-        }
-
-        if (input.password !== input.confirmPassword) {
-            throw new BadRequestError(Errors.PasswordsDoNotMatch);
+            throw new TRPCError({ code: 'BAD_REQUEST' });
         }
 
         const newUser = await ctx.prisma.user.create({

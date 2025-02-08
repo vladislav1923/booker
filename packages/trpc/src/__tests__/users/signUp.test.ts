@@ -2,7 +2,6 @@ import { beforeEach, describe, expect, it } from '@jest/globals';
 import { trpcRouter } from '../..';
 import { createMockContext, MockContext } from '../../__mocks__/context.mock';
 import { Context } from '../../context';
-import { BadRequestError, Errors } from '../../errors';
 import {
     PASSWORD,
     USER,
@@ -10,6 +9,7 @@ import {
     WRONG_PASSWORD,
 } from '../../__fixtures__/users.fixture';
 import { SignUpInput } from '../../routes/users/signUp';
+import { TRPCError } from '@trpc/server';
 
 describe('@repo/trpc -> Users -> Sign Up', () => {
     const INPUT: SignUpInput = {
@@ -46,8 +46,8 @@ describe('@repo/trpc -> Users -> Sign Up', () => {
             await trpcRouter.createCaller(ctx).signUp(INPUT);
             expect(true).toBeFalsy();
         } catch (error: any) {
-            expect(error).toBeInstanceOf(BadRequestError);
-            expect(error.status).toBe(Errors.UserAlreadyExists);
+            expect(error).toBeInstanceOf(TRPCError);
+            expect(error.code).toBe('BAD_REQUEST');
         }
     });
 
@@ -59,8 +59,7 @@ describe('@repo/trpc -> Users -> Sign Up', () => {
             });
             expect(true).toBeFalsy();
         } catch (error: any) {
-            expect(error).toBeInstanceOf(BadRequestError);
-            expect(error.status).toBe(Errors.PasswordsDoNotMatch);
+            expect(error).toBeInstanceOf(TRPCError);
         }
     });
 

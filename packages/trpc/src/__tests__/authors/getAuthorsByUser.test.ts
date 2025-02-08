@@ -2,9 +2,9 @@ import { beforeEach, describe, expect, it } from '@jest/globals';
 import { createMockContext, MockContext } from '../../__mocks__/context.mock';
 import { Context } from '../../context';
 import { trpcRouter } from '../../index';
-import { Errors, ForbiddenError } from '../../errors';
 import { AUTHOR } from '../../__fixtures__/authors.fixture';
 import { USER } from '../../__fixtures__/users.fixture';
+import { TRPCError } from '@trpc/server';
 
 describe('@repo/trpc -> Authors -> GetAuthorsByUser', () => {
     let mockCtx: MockContext;
@@ -37,8 +37,8 @@ describe('@repo/trpc -> Authors -> GetAuthorsByUser', () => {
             await trpcRouter.createCaller(ctx).getAuthorsByUser();
             expect(true).toBeFalsy();
         } catch (error: any) {
-            expect(error).toBeInstanceOf(ForbiddenError);
-            expect(error.status).toBe(Errors.NotAuthorized);
+            expect(error).toBeInstanceOf(TRPCError);
+            expect(error.code).toBe('UNAUTHORIZED');
         }
     });
 });

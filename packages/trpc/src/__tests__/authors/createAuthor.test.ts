@@ -3,7 +3,6 @@ import { TRPCError } from '@trpc/server';
 import { createMockContext, MockContext } from '../../__mocks__/context.mock';
 import { Context } from '../../context';
 import { trpcRouter } from '../../index';
-import { Errors, ForbiddenError } from '../../errors';
 import { AUTHOR } from '../../__fixtures__/authors.fixture';
 import { USER } from '../../__fixtures__/users.fixture';
 import { CreateAuthorInput } from '../../routes/authors/createAuthor';
@@ -43,8 +42,8 @@ describe('@repo/trpc -> Authors -> CreateAuthor', () => {
             await trpcRouter.createCaller(ctx).createAuthor(INPUT);
             expect(true).toBeFalsy();
         } catch (error: any) {
-            expect(error).toBeInstanceOf(ForbiddenError);
-            expect(error.status).toBe(Errors.NotAuthorized);
+            expect(error).toBeInstanceOf(TRPCError);
+            expect(error.code).toBe('UNAUTHORIZED');
         }
     });
 
