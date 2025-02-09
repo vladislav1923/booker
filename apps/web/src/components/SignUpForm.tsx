@@ -6,7 +6,8 @@ import { Label } from '@repo/ui/label';
 import { TRPCClientError } from '@trpc/client';
 import { Form, Formik, FormikHelpers, FormikProps } from 'formik';
 
-import { trpc } from '../../trpc';
+import useToasts from '../hooks/useToasts';
+import { trpc } from '../trpc';
 
 type Values = {
     firstName: string;
@@ -28,6 +29,7 @@ const initialValues: Values = {
 
 const SignUpForm = () => {
     const signUp = trpc.signUp.useMutation();
+    const { toast } = useToasts();
 
     const submitHandler = async (
         values: Values,
@@ -35,7 +37,12 @@ const SignUpForm = () => {
     ) => {
         setSubmitting(true);
 
+        toast({
+            title: 'Welcome!',
+        });
+
         try {
+            setSubmitting(true);
             const response = await signUp.mutateAsync(values);
             console.log('REPONSE: ', response);
         } catch (error: unknown) {

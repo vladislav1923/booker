@@ -14,7 +14,8 @@
     "./card": "./src/card.tsx",
     "./checkbox": "./src/checkbox.tsx",
     "./input": "./src/input.tsx",
-    "./label": "./src/label.tsx"
+    "./label": "./src/label.tsx",
+    "./toast": "./src/toast.tsx"
   },
   "scripts": {
     "build": "tailwindcss -i ./src/styles.css -o ./dist/index.css",
@@ -39,6 +40,7 @@
     "@radix-ui/react-checkbox": "^1.1.3",
     "@radix-ui/react-label": "^2.1.1",
     "@radix-ui/react-slot": "^1.1.1",
+    "@radix-ui/react-toast": "^1.2.6",
     "class-variance-authority": "^0.7.1",
     "classnames": "^2.5.1",
     "lucide-react": "^0.473.0",

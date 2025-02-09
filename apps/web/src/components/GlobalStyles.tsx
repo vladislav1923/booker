@@ -8,7 +8,7 @@ const roboto = Roboto({
     subsets: ['latin', 'cyrillic'],
 });
 
-export function GlobalStyles() {
+const GlobalStyles = () => {
     return (
         <style jsx global>{`
             html {
@@ -17,3 +17,5 @@ export function GlobalStyles() {
         `}</style>
     );
 }
+
+export default GlobalStyles;
