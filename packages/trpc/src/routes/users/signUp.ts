@@ -33,7 +33,10 @@ export const signUpTRPCRoute = trpc.procedure
         });
 
         if (existingUser) {
-            throw new TRPCError({ code: 'BAD_REQUEST' });
+            throw new TRPCError({
+                code: 'BAD_REQUEST',
+                cause: new Error('User already exists'),
+            });
         }
 
         const newUser = await ctx.prisma.user.create({

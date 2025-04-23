@@ -6,3 +6,6 @@ prepare:
 
 start:
 	docker-compose up
+
+dev:
+	npm run dev

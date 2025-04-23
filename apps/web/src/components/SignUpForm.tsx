@@ -5,8 +5,8 @@ import { Input } from '@repo/ui/input';
 import { Label } from '@repo/ui/label';
 import { TRPCClientError } from '@trpc/client';
 import { Form, Formik, FormikHelpers, FormikProps } from 'formik';
+import { toast } from 'react-toastify';
 
-import useToasts from '../hooks/useToasts';
 import { trpc } from '../trpc';
 
 type Values = {
@@ -29,17 +29,13 @@ const initialValues: Values = {
 
 const SignUpForm = () => {
     const signUp = trpc.signUp.useMutation();
-    const { toast } = useToasts();
+    toast("Wow so easy!")
 
     const submitHandler = async (
         values: Values,
         { setSubmitting, setErrors }: FormikHelpers<Values>
     ) => {
         setSubmitting(true);
-
-        toast({
-            title: 'Welcome!',
-        });
 
         try {
             setSubmitting(true);
